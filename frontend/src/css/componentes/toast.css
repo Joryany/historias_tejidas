@@ -1,0 +1,35 @@
+.toast-contenedor {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  box-shadow: var(--sombra-media);
+  z-index: 10000;
+  animation: deslizar 0.3s ease-out;
+}
+
+.toast-contenedor.exito {
+  background-color: var(--frambuesa);
+}
+
+.toast-contenedor.error {
+  background-color: var(--rosa-fuerte);
+}
+
+@keyframes deslizar {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .toast-contenedor {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}

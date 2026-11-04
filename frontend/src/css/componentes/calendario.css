@@ -1,0 +1,156 @@
+
+/* Calendario exclusivo de Historias Tejidas */
+
+.ht-calendario {
+  position: relative;
+  width: 100%;
+  color: #6B202A;
+  font-family: inherit;
+}
+
+.ht-calendario__campo {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  background: #fffdf9;
+  border: 1px solid #e5d5cd;
+  border-radius: 8px;
+  color: #5b4843;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+  appearance: none;
+}
+
+
+
+.ht-calendario__campo:hover,
+.ht-calendario__campo:focus-visible {
+  outline: none;
+  border-color: #D96B64;
+  box-shadow: 0 0 0 4px rgba(217, 107, 100, 0.13);
+}
+
+.ht-calendario__icono {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  color: #FFF8F2;
+  background: #E8797D;
+  border-radius: 50%;
+  font-size: 1.4rem;
+}
+
+.ht-calendario__panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 10px);
+  left: 0;
+  width: min(100%, 360px);
+  padding: 18px;
+  box-sizing: border-box;
+  background: #FFF9F5;
+  border: 1px solid #E8BDB7;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(107, 32, 42, 0.18);
+}
+
+.ht-calendario .rdp-root {
+  --rdp-accent-color: #D95768;
+  --rdp-accent-background-color: #F6D6CD;
+  --rdp-day-height: 40px;
+  --rdp-day-width: 40px;
+  --rdp-day_button-height: 38px;
+  --rdp-day_button-width: 38px;
+  --rdp-selected-border: 2px solid #D95768;
+  --rdp-today-color: #BD4B77;
+  margin: 0 auto;
+  color: #6B202A;
+  font-family: inherit;
+}
+
+.ht-calendario .rdp-month_caption {
+  color: #D3485B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.ht-calendario .rdp-weekday {
+  color: #8F3F5F;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.ht-calendario .rdp-day_button {
+  border-radius: 50%;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.ht-calendario .rdp-day_button:hover {
+  background: #F6D6CD;
+  color: #6B202A;
+}
+
+.ht-calendario .rdp-selected .rdp-day_button {
+  color: #FFF8F2;
+  background: #D95768;
+  border-color: #D95768;
+}
+
+.ht-calendario .rdp-today:not(.rdp-selected) .rdp-day_button {
+  color: #BD4B77;
+  border: 1px solid #D96B64;
+}
+
+.ht-calendario .rdp-disabled .rdp-day_button {
+  color: #C9B6B2;
+  cursor: not-allowed;
+}
+
+.ht-calendario .rdp-footer {
+  padding-top: 12px;
+  color: #842C43;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.ht-calendario__cerrar {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  color: #842C43;
+  background: #F6D6CD;
+  border: 1px solid #E8BDB7;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ht-calendario__cerrar:hover {
+  color: #FFF8F2;
+  background: #D95768;
+}
+
+@media (max-width: 400px) {
+  .ht-calendario__panel {
+    padding: 10px;
+  }
+
+  .ht-calendario .rdp-root {
+    --rdp-day-height: 35px;
+    --rdp-day-width: 35px;
+    --rdp-day_button-height: 33px;
+    --rdp-day_button-width: 33px;
+  }
+}

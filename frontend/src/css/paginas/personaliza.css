@@ -1,0 +1,454 @@
+/*==================================================
+=                 PÁGINA PERSONALIZA               =
+==================================================*/
+
+.pagina-personaliza {
+    width: min(94%, 1100px);
+    margin: 32px auto 48px;
+    padding: 0;
+    box-sizing: border-box;
+    color: #6B202A;
+}
+
+/* ---------- TÍTULO PRINCIPAL ---------- */
+
+.pagina-personaliza > h1 {
+    margin: 0 0 24px;
+    color: #D3485B;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 2px 3px rgba(107, 32, 42, 0.10);
+}
+
+/* ---------- INFORMACIÓN DEL PRODUCTO ---------- */
+
+.pagina-personaliza .personaliza__informacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: min(100%, 800px);
+    margin: 0 auto 22px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #FAF0EB;
+    border: 1px solid #E8BDB7;
+    border-radius: 28px;
+    box-shadow: 0 5px 12px rgba(89, 43, 43, 0.18);
+}
+
+.pagina-personaliza .personaliza__informacion:not(:has(p, img)) {
+    display: none;
+}
+
+.pagina-personaliza .personaliza__informacion p {
+    margin: 0;
+    color: #6B202A;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.pagina-personaliza .personaliza__informacion img {
+    display: block;
+    width: 190px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border: 2px solid #F6D6CD;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(89, 43, 43, 0.15);
+}
+
+/*==================================================
+=            FORMULARIO DE PERSONALIZACIÓN         =
+==================================================*/
+
+.pagina-personaliza > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(100%, 800px);
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 32px);
+    box-sizing: border-box;
+    background: #FAF0EB;
+    border: 1px solid #E8BDB7;
+    border-radius: 26px;
+    box-shadow: 0 5px 14px rgba(89, 43, 43, 0.20);
+}
+
+/* ---------- ETIQUETAS ---------- */
+
+.pagina-personaliza > form > label {
+    display: block;
+    margin-top: 10px;
+    color: #842C43;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+.pagina-personaliza > form > label:first-child {
+    margin-top: 0;
+}
+
+/* ---------- CAMPOS DE ENTRADA, SELECTS Y CALENDARIOS ---------- */
+
+.pagina-personaliza > form > input,
+.pagina-personaliza > form > select,
+.pagina-personaliza > form > textarea,
+.pagina-personaliza form .ht-calendario__campo {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    margin: 0;
+    padding: 11px 14px;
+    box-sizing: border-box;
+    color: #6B202A;
+    background: #FFF7F3;
+    border: 1.5px solid #F2C9C0;
+    border-radius: 14px;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.pagina-personaliza > form > input::placeholder,
+.pagina-personaliza > form > textarea::placeholder {
+    color: #8F3F5F;
+    opacity: 0.75;
+}
+
+.pagina-personaliza > form > input:focus,
+.pagina-personaliza > form > select:focus,
+.pagina-personaliza > form > textarea:focus,
+.pagina-personaliza form .ht-calendario__campo:focus-within {
+    outline: none;
+    border-color: #D96B64;
+    background: #FFFDF9;
+    box-shadow: 0 0 0 4px rgba(217, 107, 100, 0.15);
+}
+
+/* ---------- INPUT CON PREFIJO (WHATSAPP) ---------- */
+
+.input-con-prefijo {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 46px;
+    background: #FFF7F3;
+    border: 1.5px solid #F2C9C0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.input-con-prefijo:focus-within {
+    border-color: #D96B64;
+    background: #FFFDF9;
+    box-shadow: 0 0 0 4px rgba(217, 107, 100, 0.15);
+}
+
+.prefijo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    background: #F8E2DC;
+    color: #842C43;
+    font-weight: 700;
+    font-size: 1rem;
+    border-right: 1.5px solid #F2C9C0;
+    border-radius: 0;
+    user-select: none;
+}
+
+/* Sin !important: el <input> está dentro del wrapper, por lo que no coincide con las
+   reglas "form > input" de arriba y no hay conflicto de especificidad que resolver.
+   VERIFICAR visualmente el campo de WhatsApp tras la migración. */
+.input-con-prefijo input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    min-height: 100%;
+    height: auto;
+    padding: 0 14px;
+    color: #6B202A;
+    font-size: 1rem;
+}
+
+.input-con-prefijo input:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.error-mensaje {
+    display: block;
+    margin-top: 4px;
+    color: var(--frambuesa);
+    background: transparent;
+    border: solid 2px var(--rosa-coral);
+    padding: var(--padding-tarjeta);
+}
+
+/* ---------- CAMPO DE CALENDARIO: corazón y texto ---------- */
+/* Se mantienen los !important: Calendario.css (no incluido en el material recibido)
+   podría declarar estos <span> con mayor especificidad. Retirar solo tras verificarlo. */
+
+.pagina-personaliza .ht-calendario__campo span,
+.ht-calendario__campo span {
+    display: inline-block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: inherit !important;
+    font-size: 1rem !important;
+}
+
+.pagina-personaliza .ht-calendario__campo span:last-child,
+.ht-calendario__campo span:last-child {
+    margin-left: 6px !important;
+}
+
+/* ---------- CONTENEDOR DEL MAPA ---------- */
+
+.contenedor-mapa {
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1.5px solid #F2C9C0;
+    box-shadow: 0 4px 10px rgba(107, 32, 42, 0.08);
+}
+
+.contenedor-mapa iframe {
+    display: block;
+    width: 100%;
+    height: clamp(160px, 28vw, 200px);
+    border: 0;
+}
+
+/* ---------- BOTÓN DE ENVÍO ---------- */
+
+.pagina-personaliza > form > button.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: fit-content;
+    min-width: 220px;
+    max-width: 100%;
+    min-height: 46px;
+    margin-top: 18px;
+    padding: 11px 24px;
+    box-sizing: border-box;
+    color: #FFF8F2;
+    background: #E8797D;
+    border: 1px solid #D96B64;
+    border-radius: 999px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 9px rgba(107, 32, 42, 0.16);
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pagina-personaliza > form > button.button:hover {
+    color: #FFF8F2;
+    background: #D95768;
+    border-color: #C74B59;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(107, 32, 42, 0.20);
+}
+
+.pagina-personaliza > form > button.button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(107, 32, 42, 0.15);
+}
+
+.pagina-personaliza > form > button.button:focus-visible {
+    outline: 3px solid #D96B64;
+    outline-offset: 4px;
+}
+
+/* ---------- MENSAJE DE CONFIRMACIÓN ---------- */
+
+.pagina-personaliza > div:has(> h3) {
+    width: min(100%, 800px);
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 32px);
+    box-sizing: border-box;
+    text-align: center;
+    background: #FAF0EB;
+    border: 1px solid #E8BDB7;
+    border-radius: 26px;
+    box-shadow: 0 5px 14px rgba(89, 43, 43, 0.20);
+}
+
+.pagina-personaliza > div > h3 {
+    color: #D3485B;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    line-height: 1.3;
+}
+
+.pagina-personaliza > div > p {
+    color: #6B202A;
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.pagina-personaliza > div > a {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 11px 22px;
+    color: #FFF8F2;
+    background: #E8797D;
+    border: 1px solid #D96B64;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.pagina-personaliza > div > a:hover {
+    color: #FFF8F2;
+    background: #D95768;
+}
+
+
+/*==================================================
+=               RESPONSIVE PERSONALIZA             =
+= Unificado: antes existían dos bloques 800px y    =
+= dos 600px casi idénticos. Se conservan los       =
+= valores que ganaban en la cascada (el segundo).  =
+==================================================*/
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 768px) {
+    .pagina-personaliza {
+        width: 94%;
+        margin-top: 32px;
+    }
+
+    .pagina-personaliza > h1 {
+        font-size: clamp(1.8rem, 4.5vw, 2.2rem);
+    }
+
+    .pagina-personaliza > form {
+        padding: 28px;
+    }
+}
+
+/* ---------- MÓVILES ---------- */
+
+@media (max-width: 600px) {
+    .pagina-personaliza {
+        width: calc(100% - 24px);
+        margin: 28px auto 40px;
+    }
+
+    .pagina-personaliza > h1 {
+        margin-bottom: 18px;
+        font-size: 1.8rem;
+    }
+
+    .pagina-personaliza .personaliza__informacion {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .pagina-personaliza .personaliza__informacion p {
+        font-size: 0.95rem;
+    }
+
+    .pagina-personaliza > form {
+        gap: 8px;
+        padding: 22px 18px;
+        border-radius: 24px;
+    }
+
+    .pagina-personaliza > form > label {
+        font-size: 1rem;
+    }
+
+    .pagina-personaliza > form > input,
+    .pagina-personaliza > form > select,
+    .pagina-personaliza > form > textarea,
+    .input-con-prefijo,
+    .pagina-personaliza form .ht-calendario__campo {
+        min-height: 46px;
+        font-size: 16px;
+    }
+
+    .pagina-personaliza > form > input,
+    .pagina-personaliza > form > select,
+    .pagina-personaliza > form > textarea {
+        padding: 13px;
+    }
+
+    .input-con-prefijo input {
+        padding: 0 13px;
+    }
+
+    .pagina-personaliza > form > textarea {
+        min-height: 140px;
+    }
+
+    .pagina-personaliza > form > button.button {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+        margin-top: 16px;
+        font-size: 1rem;
+    }
+
+    .pagina-personaliza > div:has(> h3) {
+        padding: 24px 18px;
+        border-radius: 24px;
+    }
+
+    .pagina-personaliza > div > h3 {
+        font-size: 1.45rem;
+    }
+}
+
+/* ---------- ACCESIBILIDAD ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .pagina-personaliza > form > input,
+    .pagina-personaliza > form > select,
+    .pagina-personaliza > form > textarea,
+    .input-con-prefijo,
+    .pagina-personaliza form .ht-calendario__campo,
+    .pagina-personaliza > form > button.button,
+    .pagina-personaliza > div > a {
+        transition: none;
+    }
+}

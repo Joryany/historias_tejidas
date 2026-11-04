@@ -1,0 +1,111 @@
+/*==================================================
+=                    TARJETAS                      =
+==================================================*/
+
+.tarjeta-container {
+    background: var(--rosa-medio);
+    padding: var(--padding-seccion);
+    border-radius: var(--radio);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 260px));
+    justify-content: center;
+    gap: var(--espacio-md);
+    margin: var(--espacio-lg) auto;
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta {
+    background: var(--rosa-crema);
+    border-radius: var(--radio);
+    padding: var(--padding-tarjeta);
+    box-shadow: var(--sombra-grande);
+    transition: transform var(--transicion);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    max-width: 300px;
+    margin-inline: auto;
+}
+
+.tarjeta {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-10px) scale(1.02); /* Se levanta y crece un 2% */
+  box-shadow: 0 15px 30px rgba(189, 75, 119, 0.3); /* Sombra rosada más grande */
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 210px;
+    object-fit: contain;
+    border-radius: var(--radio);
+    margin-bottom: var(--espacio-sm);
+}
+
+.tarjeta h3 {
+    margin-bottom: var(--espacio-sm);
+}
+
+.tarjeta p {
+    text-align: center;
+    margin-bottom: var(--espacio-md);
+    flex-grow: 1;
+}
+
+.tarjeta:hover {
+    transform: translateY(-2px);
+}
+
+.tarjeta .button {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------- Información del producto dentro de la tarjeta ---------- */
+
+.producto-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+.producto-info h3 {
+    min-height: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.producto-info .precio {
+    margin-top: auto;
+    margin-bottom: var(--espacio-sm);
+}
+
+.producto-info .button {
+    align-self: center;
+}
+
+
+/*==================================================
+=            RESPONSIVE TARJETAS                   =
+==================================================*/
+
+@media (max-width: 600px) {
+
+    .tarjeta-container {
+        padding: var(--espacio-sm);
+    }
+
+    .tarjeta {
+        padding: var(--espacio-sm);
+    }
+}

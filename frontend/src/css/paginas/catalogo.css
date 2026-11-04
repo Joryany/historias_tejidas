@@ -1,0 +1,221 @@
+/*==================================================
+=                 PÁGINA CATÁLOGO                  =
+==================================================*/
+
+/* ====== BOTONES DE CATEGORÍA ====== */
+
+.nav__catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espacio-sm);
+}
+
+.boton-categoria {
+    background: var(--rosa-palido);
+    border: 2px solid var(--rosa-suave);
+    border-radius: var(--radio);
+    padding: var(--boton-y) var(--boton-x);
+    color: var(--rosa-principal);
+    font-weight: var(--negrita);
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: var(--texto);
+    transition: background-color var(--transicion), color var(--transicion);
+}
+
+.boton-categoria:hover {
+    background: var(--frambuesa);
+    color: var(--rosa-crema);
+}
+
+.nav__catalogo--activo {
+    background-color: var(--frambuesa);
+    color: var(--blanco);
+    border: 2px solid var(--rosa-oscuro);
+    border-radius: var(--radio);
+    padding: var(--boton-y) var(--boton-x);
+    font-weight: var(--negrita);
+    box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
+}
+
+/* Sin !important: (0,2,0) y posterior a .boton-categoria y .boton-categoria:hover */
+.boton-categoria.nav__a--activo {
+    background: var(--frambuesa);
+    color: var(--blanco);
+    border-color: var(--frambuesa);
+}
+
+
+/* ====== CONTROLES DEL CATÁLOGO ====== */
+
+.controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+    justify-content: center;
+}
+
+.buscador,
+.ordenador {
+    padding: var(--boton-y) var(--boton-x);
+    border: 2px solid var(--rosa-suave);
+    border-radius: var(--radio);
+    background-color: var(--rosa-fondo);
+    color: var(--rosa-principal);
+    font-size: var(--texto);
+}
+
+.buscador:focus {
+    outline: none;
+    border: 2px solid var(--rosa-principal);
+    box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ordenador:focus {
+    outline: none;
+    border: 2px solid var(--rosa-principal);
+    box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
+}
+
+/* ====== BÚSQUEDA + CATEGORÍAS ====== */
+
+.catalogo__buscadores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-sm);
+}
+
+
+/* ====== PAGINACIÓN ====== */
+
+/* Unificada: antes .paginacion estaba declarada dos veces; se conservan los valores
+   que ya "ganaban" en la cascada (gap 12px, margin-top 40px, align-items, wrap). */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.boton-pagina {
+    background: var(--rosa-palido);
+    border: 2px solid var(--rosa-suave);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: var(--rosa-principal);
+    font-weight: var(--negrita);
+    cursor: pointer;
+    transition: background-color var(--transicion), color var(--transicion);
+}
+
+.boton-pagina:hover {
+    background: var(--frambuesa);
+    color: var(--rosa-crema);
+}
+
+.btn-pagina {
+    background-color: var(--rosa-palido);
+    color: var(--rosa-principal);
+    border: 2px solid var(--rosa-principal);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: var(--negrita);
+    transition: all 0.3s;
+}
+
+.btn-pagina:hover:not(:disabled) {
+    background-color: var(--rosa-palido);
+}
+
+.btn-pagina.activo {
+    background-color: var(--rosa-principal);
+    color: white;
+    border-color: var(--rosa-principal);
+}
+
+.btn-pagina:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/*==================================================
+=                RESPONSIVE CATÁLOGO               =
+==================================================*/
+
+/* ===== TABLET ===== */
+@media (max-width: 768px) {
+
+    .nav__catalogo {
+        gap: var(--espacio-xs);
+        margin-bottom: var(--espacio-md);
+    }
+
+    .boton-categoria {
+        padding: var(--boton-y) var(--boton-x);
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== CELULAR ===== */
+@media (max-width: 480px) {
+
+    .nav__catalogo {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: var(--espacio-md);
+    }
+
+    .boton-categoria {
+        width: 100%;
+        padding: 10px 8px;
+        font-size: 0.9rem;
+        border-width: 2px;
+    }
+}
+
+/* ===== CELULARES MUY PEQUEÑOS ===== */
+@media (max-width: 360px) {
+
+    .nav__catalogo {
+        grid-template-columns: 1fr;
+    }
+
+    .boton-categoria {
+        font-size: 0.85rem;
+        padding: 9px 6px;
+    }
+}
+
+/* Debe ir después de 480/360 para conservar el orden de cascada original */
+@media (max-width: 600px) {
+
+    .controles {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buscador,
+    .ordenador {
+        width: 100%;
+    }
+
+    .nav__catalogo {
+        gap: var(--espacio-xs);
+    }
+
+    .boton-categoria {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.7rem;
+    }
+}

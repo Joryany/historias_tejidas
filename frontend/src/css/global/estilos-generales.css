@@ -1,0 +1,560 @@
+/*==================================================
+=                 VARIABLES GLOBALES               =
+==================================================*/
+
+:root {
+
+    /* Colores */
+    --blanco: #f8eded;
+    --crema: #fff8e6;
+    --rosa-fondo: #FFF3F0;
+    --rosa-crema: #FAF0EB;
+    --rosa-palido: #F6D6CD;
+    --rosa-suave: #F4A29E;
+    --rosa-medio: #E87C7C;
+    --rosa-coral: #D96B64;
+    --rosa-principal: #C74B59;
+    --rosa-fuerte: #B13A4A;
+    --frambuesa: #BD4B77;
+    --vino-rosa: #6B202A;
+    --rosa-oscuro: #8f3f5f;
+
+    /* Gradientes */
+    --gradiente: linear-gradient(180deg, var(--rosa-crema) 0%, var(--rosa-suave) 40%, var(--rosa-medio) 80%, var(--rosa-fuerte) 100%);
+    --gradiente-resalte: linear-gradient(180deg, var(--rosa-palido) 0%, var(--rosa-suave) 40%, var(--rosa-medio) 80%, var(--frambuesa) 100%);
+    --gradiente-capa: linear-gradient(180deg, rgba(250, 240, 235, .4) 0%, rgba(74, 20, 28, .45) 30%, rgba(107, 32, 42, .25) 100%);
+
+    /* Bordes */
+    --radio: 1.5rem;
+    --radio-pill: 62.4375rem;
+
+    /* Peso de fuente */
+    --negrita: 600;
+    --normal: 400;
+    --fina: 200;
+
+    /* Transiciones */
+    --transicion: .3s ease;
+    --transicion-lenta: .5s ease;
+
+    /* Sombras */
+    --sombra-pequeña: 0 0.1875rem 0.3125rem rgba(133, 48, 104, .219);
+    --sombra-media: 0 0.1875rem 0.75rem rgba(0, 0, 0, .4);
+    --sombra-grande: 0 0.1875rem 0.9375rem rgba(0, 0, 0, .5);
+
+    /* Espaciado — escala única para margin, padding y gap */
+    --espacio-xs: clamp(0.4rem, 1vw, 0.5rem);
+    --espacio-sm: clamp(0.6rem, 1.6vw, 0.8rem);
+    --espacio-md: clamp(0.9rem, 2vw, 1.1rem);
+    --espacio-lg: clamp(1.2rem, 2.6vw, 1.5rem);
+    --espacio-xl: clamp(1.5rem, 3.4vw, 2rem);
+
+    /* Padding de componentes específicos */
+    --padding-tarjeta: var(--espacio-md) var(--espacio-lg);
+    --padding-seccion: var(--espacio-lg) var(--espacio-xl);
+    --padding-hero: clamp(1.75rem, 4.5vw, 2.5rem) var(--espacio-xl);
+    --boton-y: 0.45rem;
+    --boton-x: 0.8rem;
+
+    /* Tipografía */
+    --texto: 0.95rem;
+    --texto-grande: 1.1rem;
+    --texto-mediano: 1.1rem;
+
+    --titulo-1: clamp(2.1rem, 4.2vw, 3.1rem);
+    --titulo-2: clamp(1.9rem, 3.4vw, 2.6rem);
+    --titulo-3: clamp(1.6rem, 2.4vw, 2rem);
+    /* Antes: clamp(1.5rem, 2vw, 1.4rem). Al ser el mínimo mayor que el máximo,
+       el navegador ya resolvía siempre 1.5rem: mismo resultado, sin la incoherencia. */
+    --titulo-4: 1.3rem;
+    --titulo-5: clamp(0.95rem, 1.3vw, 1.05rem);
+}
+
+
+/*==================================================
+=                     RESET                        =
+==================================================*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+/* Las imágenes nunca deben ser más anchas que su contenedor */
+img {
+    max-width: 100%;
+}
+
+
+/*==================================================
+=                  ELEMENTOS BASE                  =
+==================================================*/
+
+body {
+    background: var(--gradiente);
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Times New Roman', Times, serif;
+    color: var(--rosa-crema);
+}
+
+
+/*==================================================
+=                  TIPOGRAFÍA                      =
+==================================================*/
+
+h2 {
+    text-align: center;
+    font-size: var(--titulo-3);
+    font-weight: var(--negrita);
+    color: var(--rosa-principal);
+    margin-bottom: var(--espacio-md);
+    text-shadow: var(--sombra-pequeña);
+}
+
+h3 {
+    text-align: center;
+    font-size: var(--titulo-4);
+    font-weight: var(--negrita);
+    color: var(--rosa-principal);
+    margin-bottom: var(--espacio-sm);
+    text-shadow: var(--sombra-pequeña);
+    margin-top: var(--espacio-md);
+}
+
+h4 {
+    text-align: center;
+    font-size: var(--titulo-5);
+    font-weight: var(--negrita);
+    color: var(--rosa-principal);
+    margin-bottom: var(--espacio-sm);
+}
+
+p {
+    text-align: left;
+    line-height: 1.7;
+    margin-bottom: var(--espacio-sm);
+    color: var(--rosa-oscuro);
+    font-size: var(--texto);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+/*==================================================
+=                LAYOUT GENERAL                    =
+==================================================*/
+
+section {
+    max-width: min(1200px, calc(100% - 2 * var(--espacio-md)));
+    margin: var(--espacio-lg) auto;
+    padding: var(--padding-seccion);
+    align-items: center;
+    background-color: var(--rosa-crema);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-grande);
+}
+
+article {
+    margin-bottom: var(--espacio-sm);
+    background-color: var(--rosa-fondo);
+}
+
+
+/*==================================================
+=            COMPONENTES REUTILIZABLES             =
+==================================================*/
+
+aside {
+    background: var(--rosa-fondo);
+    color: var(--rosa-principal);
+    text-align: center;
+    font-weight: var(--negrita);
+    border-radius: var(--radio-pill);
+    margin: var(--espacio-lg);
+    padding: var(--boton-y) var(--boton-x);
+}
+
+span {
+    background-color: var(--rosa-coral);
+    border-radius: var(--radio);
+    padding: 0.25rem 0.5rem;
+    color: var(--rosa-crema);
+    border: 2px solid var(--rosa-principal);
+}
+
+.mensaje_carga {
+    background: var(--rosa-fondo);
+    text-align: center;
+}
+
+/* ---------- Botones ---------- */
+
+.button {
+    background: var(--rosa-palido);
+    border-radius: var(--radio);
+    padding: var(--boton-y) var(--boton-x);
+    color: var(--rosa-principal);
+    text-decoration: none;
+    font-weight: var(--negrita);
+    transition:
+        color var(--transicion),
+        background-color var(--transicion),
+        transform var(--transicion);
+    border: 2px solid var(--rosa-suave);
+    text-align: center;
+    max-width: 13.75rem;
+    box-shadow: var(--sombra-pequeña);
+}
+
+.button:hover {
+    background: var(--rosa-principal);
+    color: var(--rosa-crema);
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+.button-primario {
+    background: var(--rosa-principal);
+    color: var(--rosa-crema);
+    border-color: var(--rosa-principal);
+}
+
+.button-primario:hover {
+    background: var(--frambuesa);
+    border-color: var(--frambuesa);
+}
+
+/* ---------- Estado vacío (compartido por Carrito y Favoritos) ---------- */
+
+.carrito-vacio {
+    width: 100%;
+    max-width: 900px;
+    margin: var(--espacio-xl) auto;
+    padding: var(--espacio-xl) var(--espacio-lg);
+    background-color: #ffffff;
+    border: 1px solid var(--rosa-palido);
+    border-radius: var(--radio);
+    text-align: center;
+    box-shadow: var(--sombra-pequeña);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacio-md);
+}
+
+.carrito-vacio h2 {
+    color: var(--rosa-principal);
+    font-size: var(--titulo-2, 1.5rem);
+    font-weight: 700;
+    margin: 0;
+}
+
+.carrito-vacio p {
+    color: var(--texto-secundario, #666);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 450px;
+}
+
+.carrito-vacio .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--rosa-principal);
+    color: var(--rosa-crema, #fff);
+    padding: var(--boton-y) var(--espacio-lg);
+    border-radius: var(--radio-pill);
+    text-decoration: none;
+    font-weight: var(--negrita);
+    box-shadow: var(--sombra-pequeña);
+    transition: transform var(--transicion), background-color var(--transicion), box-shadow var(--transicion);
+    margin-top: var(--espacio-sm);
+}
+
+.carrito-vacio .button:hover {
+    background-color: var(--rosa-coral, var(--rosa-principal));
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+    color: #fff;
+}
+
+.carrito-vacio-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espacio-sm);
+}
+
+
+/*==================================================
+=             HEADER Y NAVEGACIÓN                  =
+==================================================*/
+
+header {
+    max-width: min(1200px, calc(100% - 2 * var(--espacio-md)));
+    margin: var(--espacio-sm) auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-lg);
+    text-align: center;
+}
+
+header img {
+    width: 68px;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radio);
+    transition: transform var(--transicion);
+}
+
+header img:hover {
+    transform: translateY(-3px);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+}
+
+nav a {
+    background: var(--rosa-palido);
+    border-radius: var(--radio);
+    padding: var(--boton-y) var(--boton-x);
+    color: var(--rosa-principal);
+    text-decoration: none;
+    font-weight: var(--negrita);
+    transition:
+        color var(--transicion),
+        background-color var(--transicion),
+        transform var(--transicion);
+    border: 2px solid var(--rosa-suave);
+}
+
+nav a:hover {
+    background: var(--frambuesa);
+    color: var(--rosa-crema);
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+nav #nav__a--carrito {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+nav #nav__a--carrito:hover {
+    background: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+nav a #carrito {
+    width: 40px;
+    height: auto;
+    transition: transform var(--transicion);
+}
+
+nav a #carrito:hover {
+    transform: translateY(-3px);
+}
+
+#nav__a--carrito {
+    position: relative;
+}
+
+#carrito-contador {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--frambuesa);
+    color: var(--rosa-crema);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+#nav__a--activo {
+    background-color: var(--frambuesa);
+    color: var(--blanco);
+    border: 2px solid var(--frambuesa);
+}
+
+#nav__a--activo-carrito {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--frambuesa);
+    border-radius: 0;
+    padding: 0;
+}
+
+/* REVISAR: el ID "nav__a--activo-" (con guion final) parece un typo de
+   "nav__a--activo-carrito". Se conserva sin cambios: no se pueden renombrar selectores. */
+nav #nav__a--activo-:hover {
+    background: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+
+/*==================================================
+=                    FOOTER                        =
+==================================================*/
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: var(--rosa-crema);
+}
+
+.footer-container .footer-marca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espacio-sm);
+    width: 100%;
+    padding: var(--espacio-md) var(--espacio-sm);
+    background-color: var(--rosa-suave);
+    border-top: 4px solid var(--rosa-fuerte);
+    border-bottom: 4px solid var(--rosa-fuerte);
+}
+
+.footer-container .footer-marca img {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: var(--sombra-media);
+}
+
+.footer-container .footer-marca h2 {
+    color: var(--blanco);
+    font-size: var(--titulo-4);
+    font-weight: var(--negrita);
+    text-shadow: var(--sombra-media);
+}
+
+.footer-container .cont-columna {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    width: 100%;
+    max-width: 1000px;
+    padding: var(--espacio-xl) var(--espacio-lg);
+    gap: var(--espacio-lg);
+}
+
+.footer-container .cont-columna .footer-columna {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacio-xs);
+}
+
+.footer-container .footer-columna h3 {
+    margin-bottom: var(--espacio-xs);
+    color: var(--rosa-principal);
+    font-size: var(--titulo-4);
+    font-weight: var(--negrita);
+}
+
+.footer-container .footer-columna a {
+    color: var(--vino-rosa);
+    font-size: var(--texto);
+    line-height: 1.5;
+    transition: color .25s ease, transform .25s ease;
+}
+
+.footer-container .footer-columna a:hover {
+    color: var(--frambuesa);
+    transform: translateX(4px);
+}
+
+.footer-derechos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 30px;
+    padding: var(--espacio-sm) var(--espacio-md);
+    background-color: var(--rosa-medio);
+    color: var(--blanco);
+    text-align: center;
+    font-size: 0.85rem;
+    border-top: 2px solid var(--rosa-fuerte);
+    border-bottom: 2px solid var(--rosa-fuerte);
+}
+
+
+/*==================================================
+=              UTILIDADES GLOBALES                 =
+==================================================*/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--rosa-fondo);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rosa-suave);
+    border-radius: var(--radio-pill);
+    border: 2px solid var(--rosa-fondo);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--rosa-principal);
+}
+
+
+@keyframes aparecerSuave {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: aparecerSuave 0.5s ease-out forwards;
+}
+
+.button {
+  position: relative;
+  overflow: hidden;
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  transition: all 0.5s;
+}
+
+.button:hover::after {
+  left: 100%; /* La luz cruza el botón */
+}

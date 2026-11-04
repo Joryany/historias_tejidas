@@ -1,0 +1,127 @@
+/*==================================================
+=                 PÁGINA FAVORITOS                 =
+= (el estado vacío .carrito-vacio es compartido y  =
+=  vive en estilos-generales / responsive)         =
+==================================================*/
+
+.pagina-favoritos {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--padding-seccion);
+    box-sizing: border-box;
+}
+
+/* ---------- Título ---------- */
+
+.pagina-favoritos h1 {
+    position: relative;
+    text-align: center;
+    color: var(--rosa-principal);
+    font-size: var(--titulo-3);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 auto var(--espacio-xl);
+    max-width: 1200px;
+}
+
+.pagina-favoritos h1::after {
+    content: "";
+    display: block;
+    width: clamp(70px, 10vw, 120px);
+    height: 4px;
+    margin: var(--espacio-md) auto 0;
+    border-radius: var(--radio-pill);
+    background-color: var(--rosa-coral);
+}
+
+/* ---------- Contenedor ---------- */
+
+.pagina-favoritos_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: var(--espacio-lg);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* ---------- Wrapper / tarjeta ---------- */
+
+.favorito-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio-md);
+    background-color: #ffffff;
+    border-radius: var(--radio);
+    border: 1px solid var(--rosa-palido);
+    padding: var(--espacio-md);
+    box-shadow: var(--sombra-pequeña);
+    box-sizing: border-box;
+    min-width: 0;
+    transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.favorito-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-media);
+}
+
+/* ---------- Botón quitar favorito ---------- */
+
+.btn-quitar-favorito {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--rosa-palido);
+    border-radius: var(--radio-pill);
+    padding: var(--boton-y) var(--boton-x);
+    color: var(--rosa-principal);
+    text-decoration: none;
+    font-weight: var(--negrita);
+    font-size: 0.875rem;
+    border: 1px solid var(--rosa-medio);
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: var(--sombra-pequeña);
+    box-sizing: border-box;
+    transition:
+        color var(--transicion),
+        background-color var(--transicion),
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.btn-quitar-favorito:hover {
+    background: var(--rosa-principal);
+    color: var(--rosa-crema);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+}
+
+
+/*==================================================
+=               RESPONSIVE FAVORITOS               =
+==================================================*/
+
+@media (max-width: 768px) {
+
+    .pagina-favoritos {
+        padding: var(--espacio-lg) var(--espacio-md);
+    }
+
+    .pagina-favoritos_container {
+        gap: var(--espacio-md);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .pagina-favoritos {
+        padding: var(--espacio-lg) var(--espacio-sm);
+    }
+}

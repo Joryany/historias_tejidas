@@ -1,0 +1,45 @@
+.splash-contenedor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--rosa-fondo);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Por encima de todo */
+  animation: desaparecer 1s ease-in-out 2.5s forwards; /* Espera 2.5s y desaparece */
+}
+
+.splash-logo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: var(--sombra-grande);
+  animation: girarYEncoger 2.5s ease-in-out forwards;
+}
+
+.splash-contenedor h2 {
+  color: var(--rosa-principal);
+  margin-top: 20px;
+  font-size: var(--titulo-2);
+  opacity: 0;
+  animation: aparecer 1s ease-in-out 1s forwards;
+}
+
+/* Animaciones */
+@keyframes girarYEncoger {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.2) rotate(360deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+@keyframes aparecer {
+  to { opacity: 1; }
+}
+
+@keyframes desaparecer {
+  to { opacity: 0; visibility: hidden; }
+}

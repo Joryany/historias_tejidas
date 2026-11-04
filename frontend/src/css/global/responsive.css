@@ -1,0 +1,40 @@
+/*==================================================
+=             RESPONSIVE GLOBAL                    =         =
+==================================================*/
+
+
+
+/* Tablet: a partir de 768px */
+@media (min-width: 768px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        margin: var(--espacio-md) auto;
+    }
+}
+
+/* Móvil grande: menos relleno lateral para que el contenido aproveche el ancho */
+@media (max-width: 600px) {
+
+    section {
+        padding: var(--espacio-md);
+    }
+}
+
+/* Móvil: hasta 480px */
+@media (max-width: 480px) {
+
+    header {
+        gap: var(--espacio-md);
+    }
+
+    header img {
+        width: 56px;
+    }
+
+    .carrito-vacio {
+        padding: var(--espacio-lg) var(--espacio-md);
+    }
+}
