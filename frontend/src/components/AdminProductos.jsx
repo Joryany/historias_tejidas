@@ -24,14 +24,22 @@ function AdminProductos() {
     cargarProductos();
   }, []);
 
-  // Cargar productos
-  const cargarProductos = () => {
+    const cargarProductos = () => {
     fetch(`${import.meta.env.VITE_API_URL}/productos`)
       .then(res => res.json())
-      .then(datos => setProductos(datos))
-      .catch(error => console.error("Error al cargar productos:", error));
+      .then(datos => {
+        
+        if (Array.isArray(datos)) {
+          setProductos(datos);
+        } else {
+          setProductos([]);
+        }
+      })
+      .catch(error => {
+        console.error("Error al cargar productos:", error);
+        setProductos([]);
+      });
   };
-
   // Detectar cambios en los campos
   const manejarCambio = (e) => {
     setForm({

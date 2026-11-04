@@ -1682,7 +1682,7 @@ const productos = [
                 nombre: "Combinación",
                 items: [
                     { nombre: "Solo Wirt", value: "wirt", precio: 50000 },
-                    { nombre: "Solo Howl", value: "", precio: 50000 },
+                    { nombre: "Solo Howl", value: "howl", precio: 50000 },
                     { nombre: "Los dos juntos", value: "ambos", precio: 90000, defecto: true }
                 ]
             },
