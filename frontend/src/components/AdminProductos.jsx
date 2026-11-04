@@ -59,7 +59,8 @@ function AdminProductos() {
     fetch(url, {
       method: metodo,
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("adminToken")
       },
       body: JSON.stringify(form)
     })
@@ -97,8 +98,11 @@ function AdminProductos() {
   // Eliminar producto
   const eliminarProducto = (id) => {
     if (window.confirm("¿Seguro que quieres eliminar este producto?")) {
-      fetch(`${import.meta.env.VITE_API_URL}/productos/${id}`, {
-        method: "DELETE"
+            fetch(`${import.meta.env.VITE_API_URL}/productos/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": localStorage.getItem("adminToken")
+        }
       })
         .then(res => {
           if (!res.ok) {

@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const PedidoPersonalizado = require("../models/PedidoPersonalizado.js");
 
-// POST: Crear pedido personalizado (desde el formulario)
+const verificarToken = (req, res, next) => {
+    if (req.headers.authorization === process.env.ADMIN_TOKEN) next();
+    else res.status(401).json({ error: "No autorizado" });
+};
+
+// POST: Crear pedido personalizado 
 router.post("/", async function(req, res) {
     try {
         const nuevoPersonalizado = new PedidoPersonalizado(req.body);
@@ -13,8 +18,8 @@ router.post("/", async function(req, res) {
     }
 });
 
-// GET: Obtener todos los personalizados (para el Admin)
-router.get("/", async function(req, res) {
+// GET: Obtener todos
+router.get("/", verificarToken, async function(req, res) {
     try {
         const pedidos = await PedidoPersonalizado.find().sort({ fechaCreacion: -1 });
         res.json(pedidos);
@@ -23,8 +28,8 @@ router.get("/", async function(req, res) {
     }
 });
 
-// PUT: Cambiar estado
-router.put("/:id", async function(req, res) {
+// PUT: Cambiar estado 
+router.put("/:id", verificarToken, async function(req, res) {
     try {
         await PedidoPersonalizado.findByIdAndUpdate(req.params.id, { estado: req.body.estado });
         res.json({ mensaje: "Estado actualizado" });

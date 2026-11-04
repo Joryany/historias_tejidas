@@ -21,9 +21,18 @@ function AdminDashboard() {
     }
 
   
+  
+    const tokenAdmin = localStorage.getItem("adminToken");
+
+  
     Promise.all([
-      fetch(`${import.meta.env.VITE_API_URL}/pedidos`).then(r => r.json()),
-      fetch(`${import.meta.env.VITE_API_URL}/personalizados`).then(r => r.json())
+      fetch(`${import.meta.env.VITE_API_URL}/pedidos`, {
+        headers: { "Authorization": tokenAdmin }
+      }).then(r => r.json()),
+      
+      fetch(`${import.meta.env.VITE_API_URL}/personalizados`, {
+        headers: { "Authorization": tokenAdmin }
+      }).then(r => r.json())
     ]).then(([datosPedidos, datosPersonalizados]) => {
       setPedidos(datosPedidos);
       setPersonalizados(datosPersonalizados);
@@ -37,9 +46,12 @@ function AdminDashboard() {
   const cambiarEstado = (id, nuevoEstado, tipo) => {
     const ruta = tipo === "pedido" ? "pedidos" : "personalizados";
     
-    fetch(`${import.meta.env.VITE_API_URL}/${ruta}/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/${ruta}/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("adminToken") // <-- AQUÍ ESTÁ EL BOLSILLO
+      },
       body: JSON.stringify({ estado: nuevoEstado })
     }).then(res => {
       if (res.ok) {

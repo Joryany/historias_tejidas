@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Producto = require("../models/Producto.js");
 
+// Middleware para verificar el token
+const verificarToken = (req, res, next) => {
+    if (req.headers.authorization === process.env.ADMIN_TOKEN) {
+        next(); 
+    } else {
+        res.status(401).json({ error: "No autorizado" });
+    }
+};
+
 // GET /api/productos 
 router.get("/", async function(req, res) {
     try {
@@ -12,7 +21,7 @@ router.get("/", async function(req, res) {
     }
 });
 
-// GET /api/productos/:id
+// GET /api/productos/:id 
 router.get("/:id", async function(req, res) {
     try {
         const idBuscado = req.params.id;
@@ -28,8 +37,8 @@ router.get("/:id", async function(req, res) {
     }
 });
 
-// POST: Crear un nuevo producto
-router.post("/", async function(req, res) {
+// POST: Crear producto 
+router.post("/", verificarToken, async function(req, res) {
     try {
         const nuevoProducto = new Producto(req.body);
         await nuevoProducto.save();
@@ -39,10 +48,9 @@ router.post("/", async function(req, res) {
     }
 });
 
-// PUT: Editar un producto existente
-router.put("/:id", async function(req, res) {
+// PUT: Editar producto 
+router.put("/:id", verificarToken, async function(req, res) {
     try {
-        // Buscamos por el campo 'id' (ej: "abeja"), no por el _id de Mongo
         const productoActualizado = await Producto.findOneAndUpdate(
             { id: req.params.id }, 
             req.body, 
@@ -57,8 +65,8 @@ router.put("/:id", async function(req, res) {
     }
 });
 
-// DELETE: Eliminar un producto
-router.delete("/:id", async function(req, res) {
+// DELETE: Eliminar producto 
+router.delete("/:id", verificarToken, async function(req, res) {
     try {
         const productoEliminado = await Producto.findOneAndDelete({ id: req.params.id });
         if (!productoEliminado) {

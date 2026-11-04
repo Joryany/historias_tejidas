@@ -215,6 +215,7 @@
     font-size: 0.85rem;
     color: white;
     transition: opacity 0.3s;
+    background: var(--rosa-principal);
 }
 
 .btn-admin:hover {
@@ -264,23 +265,55 @@
     margin-top: 15px;
 }
 
-/* ====== FORMULARIO ====== */
-
+/* ====== FORMULARIO DE LOGIN ====== */
 .admin-form {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 22px;
-
-    background: white;
-    padding: 30px;
-    border-radius: var(--radio);
-    box-shadow: var(--sombra-media);
-    border: 1px solid var(--rosa-palido);
-
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    margin: 0;
-    color: var(--rosa-fuerte);
+    gap: 15px;
+}
+
+.admin-form label {
     text-align: left;
+    font-weight: bold;
+    color: var(--rosa-principal);
+    font-size: 1rem;
+    margin-bottom: -5px;
+}
+
+.admin-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--rosa-suave);
+    border-radius: 10px;
+    font-family: inherit;
+    box-sizing: border-box; 
+}
+
+.admin-form input:focus {
+    outline: none;
+    border-color: var(--rosa-fuerte);
+}
+
+
+.content-btn_adminlogin {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.content-btn_adminlogin .btn-admin {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    
+    max-width: none !important; 
+    max-height: none !important;
+    padding: 12px !important;
 }
 
 /* Etiquetas */

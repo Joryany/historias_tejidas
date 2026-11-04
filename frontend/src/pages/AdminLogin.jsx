@@ -13,6 +13,7 @@ function AdminLogin() {
   const manejarLogin = (e) => {
     e.preventDefault();
     
+
     fetch(`${import.meta.env.VITE_API_URL}/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,12 +61,10 @@ function AdminLogin() {
           {error && <span className="error-mensaje">{error}</span>}
 
           <div className="content-btn_adminlogin ">
-          <button type="submit" className="button btn-admin">Entrar</button>
-          <Link to="/" className="button btn-admin">← Volver a la tienda</Link>
+            <button type="submit" className="button btn-admin">Entrar</button>
+            <Link to="/" className="button btn-admin">← Volver a la tienda</Link>
           </div>
         </form>
-
-        
       </div>
     </div>
   );

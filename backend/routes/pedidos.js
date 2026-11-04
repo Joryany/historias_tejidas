@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Pedido = require("../models/Pedido.js");
 
-// POST: Crear pedido (desde el carrito)
+const verificarToken = (req, res, next) => {
+    if (req.headers.authorization === process.env.ADMIN_TOKEN) next();
+    else res.status(401).json({ error: "No autorizado" });
+};
+
+// POST: Crear pedido 
 router.post("/", async function(req, res) {
     try {
         const nuevoPedido = new Pedido(req.body);
@@ -13,8 +18,8 @@ router.post("/", async function(req, res) {
     }
 });
 
-// GET: Obtener todos los pedidos (para el Admin)
-router.get("/", async function(req, res) {
+// GET: Obtener todos los pedidos 
+router.get("/", verificarToken, async function(req, res) {
     try {
         const pedidos = await Pedido.find().sort({ fechaCreacion: -1 });
         res.json(pedidos);
@@ -23,8 +28,8 @@ router.get("/", async function(req, res) {
     }
 });
 
-// PUT: Cambiar estado (aprobar/rechazar desde el Admin)
-router.put("/:id", async function(req, res) {
+// PUT: Cambiar estado 
+router.put("/:id", verificarToken, async function(req, res) {
     try {
         await Pedido.findByIdAndUpdate(req.params.id, { estado: req.body.estado });
         res.json({ mensaje: "Estado actualizado" });
