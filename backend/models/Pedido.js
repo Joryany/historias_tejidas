@@ -7,7 +7,7 @@ const esquemaPedido = new mongoose.Schema({
     lugar: { type: String, required: true },
     productos: { type: Array, required: true },
     total: { type: Number, required: true },
-    estado: { type: String, default: "pendiente" },
+    estado: { type: String, enum: ["pendiente", "aprobado", "rechazado"], default: "pendiente" },
     fechaCreacion: { type: Date, default: Date.now }
 });
 

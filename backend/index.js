@@ -24,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URI)
     })
     .catch(function(error) {
         console.log("Error conectando a MongoDB:", error.message);
+        process.exit(1); 
     });
 
 // Ruta de prueba

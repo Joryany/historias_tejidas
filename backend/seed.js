@@ -9,17 +9,25 @@ async function sembrar() {
         await mongoose.connect(process.env.MONGODB_URI);
         console.log("✅ Conectado");
 
-         console.log("🗑️  Borrando productos anteriores (si hay)...");
+        console.log("🔍 Validando los datos antes de borrar...");
+        for (let i = 0; i < productos.length; i++) {
+            const p = new Producto(productos[i]);
+            await p.validate(); 
+        }
+        console.log("✅ Datos válidos");
+
+        console.log("🗑️ Borrando productos anteriores...");
         await Producto.deleteMany({});
-           console.log("📦 Insertando " + productos.length + " productos...");
+
+        console.log("📦 Insertando " + productos.length + " productos...");
         await Producto.insertMany(productos);
         console.log("✅ Productos insertados");
 
-        console.log("🔌 Cerrando conexión...");
         await mongoose.disconnect();
         console.log("✅ Listo");
     } catch (error) {
-        console.log("❌ Error:", error.message);
+        console.error("❌ Error:", error.message);
+        console.error("No se borró nada de la base de datos.");
         await mongoose.disconnect();
     }
 }

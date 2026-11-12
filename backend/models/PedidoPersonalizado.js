@@ -11,7 +11,7 @@ const esquemaPedidoPersonalizado = new mongoose.Schema({
     material: { type: String },
     tamano: { type: String },
     accesorios: { type: String },
-    estado: { type: String, default: "pendiente" },
+    estado: { type: String, enum: ["pendiente", "aprobado", "rechazado"], default: "pendiente" },
     fechaCreacion: { type: Date, default: Date.now }
 });
 
