@@ -1,6 +1,6 @@
 # 🧶 Historias Tejidas - E-commerce
 
-Tienda virtual de amigurumis y tejidos personalizados. Proyecto final de desarrollo web.
+Tienda virtual de amigurumis y tejidos personalizados, construida con React y Vite.  Proyecto final de desarrollo web.
 
 ## 🚀 Tecnologías utilizadas
 - **Frontend:** React, Vite, React Router, CSS3.
@@ -15,11 +15,19 @@ Tienda virtual de amigurumis y tejidos personalizados. Proyecto final de desarro
 - Panel de administración protegido (login) con gestión de pedidos y envío de mensajes automáticos por WhatsApp.
 - Chatbot interactivo "Mimí" con IA basada en reglas para guiar a los clientes.
 
+## 🛠️ Requisitos previos
+**IMPORTANTE:** Antes de iniciar el frontend, debes tener el backend corriendo. 
+1. Ve a la carpeta `../backend`, instala las dependencias (`npm install`) y corre el servidor (`npm start`).
+
 ## 🛠️ Instalación local
-1. Clonar el repositorio.
-2. Ejecutar `npm install`.
-3. Crear un archivo `.env` con `VITE_API_URL=http://localhost:3000/api`.
-4. Ejecutar `npm run dev`.
+1. Instalar las dependencias:
+   ```bash
+   npm install
+2. Clonar el repositorio.
+3. Ejecutar `npm install`.
+4. Crear un archivo `.env` con `VITE_API_URL=http://localhost:3000/api`.
+5. Ejecutar `npm run dev`.
+
 
 ## 👩‍💻 Autora
 Joryany Hormiga - Historias Tejidas.

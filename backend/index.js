@@ -12,7 +12,17 @@ const rutasAdmin = require("./routes/admin.js");
 const app = express();
 
 // Middlewares
-app.use(cors());
+// Configuración de CORS
+const allowedOrigins = ['http://localhost:5173', 'https://historias-tejidas.netlify.app'];
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    }
+}));
 app.use(express.json()); 
 
 const PUERTO = process.env.PORT || 3000;

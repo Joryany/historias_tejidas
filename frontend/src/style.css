@@ -1,3 +1,4 @@
 
 @import './css/global/estilos-generales.css';
 @import './css/global/responsive.css';
+@import "tailwindcss";

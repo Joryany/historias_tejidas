@@ -188,9 +188,9 @@ function CalculadoraPrecios() {
                     <input type="number" value={herr.costoManual} onChange={(e) => actualizarHerramienta(i, "costoManual", e.target.value)} className="calculadora-input" />
                   </div>
                 )}
-                <div className="calculadora-input-group" style={{ flex: 0.5 }}>
+                <div className="calculadora-input-group">
                   <label className="calculadora-label">¿Manual?</label>
-                  <input type="checkbox" checked={herr.usarManual} onChange={(e) => actualizarHerramienta(i, "usarManual", e.target.checked)} style={{ width: "20px", height: "20px" }} />
+                  <input type="checkbox" checked={herr.usarManual} onChange={(e) => actualizarHerramienta(i, "usarManual", e.target.checked)} />
                 </div>
                 <button type="button" className="btn-admin rechazar btn-eliminar-material" onClick={() => eliminarHerramienta(i)}>X</button>
               </div>
@@ -274,13 +274,13 @@ function CalculadoraPrecios() {
                 <label className="calculadora-label">Costo de Envío ($)</label>
                 <input type="number" value={costoEnvio} onChange={(e) => setCostoEnvio(Number(e.target.value))} className="calculadora-input" />
               </div>
-              <div className="calculadora-input-group" style={{ flex: 0.5 }}>
+              <div className="calculadora-input-group" >
                 <label className="calculadora-label">¿Lo asume la empresa?</label>
-                <input type="checkbox" checked={envioAsumido} onChange={(e) => setEnvioAsumido(e.target.checked)} style={{ width: "20px", height: "20px" }} />
+                <input type="checkbox" checked={envioAsumido} onChange={(e) => setEnvioAsumido(e.target.checked)} />
               </div>
             </div>
             
-            <hr style={{ margin: "20px 0", borderColor: "var(--rosa-suave)" }} />
+            <hr />
             
             {extras.map((ext, i) => (
               <div key={`extra-${i}`} className="calculadora-material-row">

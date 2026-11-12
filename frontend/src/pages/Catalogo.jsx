@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import TarjetaProducto from '../components/TarjetaProducto';
 import '../style.css';
 import '../css/paginas/catalogo.css';
-import { useSearchParams } from 'react-router-dom';
+import AlertaTailwind from '../components/AlertaTailwind';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Toast from '../components/Toast';
+
+
 
 function mezclarAleatoriamente(array) {
   return [...array].sort(() => Math.random() - 0.5);
@@ -14,8 +16,7 @@ function mezclarAleatoriamente(array) {
 function Catalogo() {
   const [cargando, setCargando] = useState(true); 
   const [productos, setProductos] = useState([]);  
-  
-  const [toast, setToast] = useState({ visible: false, mensaje: "", tipo: "error" });
+  const [error, setError] = useState("");
   
 
   const [searchParams] = useSearchParams();
@@ -41,13 +42,12 @@ function Catalogo() {
         const datosMezclados = mezclarAleatoriamente(datos);
         setProductos(datosMezclados);
         setCargando(false);
-      })
-      .catch((error) => {
-        console.error("Error al cargar los productos", error);
+      })     
+      .catch((errorCargar) => {
+        console.error("Error al cargar los productos", errorCargar);
         setCargando(false);
-        
-        
-        setToast({ visible: true, mensaje: "No pudimos conectar con la tienda.", tipo: "error" });
+        setError("No pudimos conectar con la tienda. Revisa tu internet.");
+    
       });
   }, []);
 
@@ -97,13 +97,12 @@ function Catalogo() {
 
   return (
     <div>
-    
-      <Toast mensaje={toast.mensaje} tipo={toast.tipo} visible={toast.visible} />
      
       <Header />
         
-
        <main>
+        {error && <AlertaTailwind mensaje={error} />}
+
         <section className="hero">
             <img src="/flores-de-cerezo.png"
                 alt="En un fondo rosado claro en la zona derecha hay flores de cerezo repartidas por dicha zona."/>

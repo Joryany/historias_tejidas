@@ -75,7 +75,7 @@ function AdminDashboard() {
   const personalizadosPendientes = personalizados.filter(p => p.estado === "pendiente");
   const personalizadosProcesados = personalizados.filter(p => p.estado !== "pendiente");
 
-    const historialCombinado = [...pedidosProcesados, ...personalizadosProcesados];
+  const historialCombinado = [...pedidosProcesados, ...personalizadosProcesados];
   
   const historialOrdenado = historialCombinado.sort((a, b) => {
    
@@ -92,7 +92,7 @@ function AdminDashboard() {
         <h1>Dashboard - Historias Tejidas</h1>
         <div className="admin-header-botones">
           <Link to="/" className="button btn-admin-header">Ir a la Tienda</Link>
-          <Link to="/admin/calculadora" className="button btn-admin-header" style={{ backgroundColor: "var(--frambuesa)", color: "white" }}>
+          <Link to="/admin/calculadora" className="button btn-admin-header" >
           Abrir Calculadora
         </Link>
           <button onClick={cerrarSesion} className="button btn-admin-header">Cerrar Sesión</button>
@@ -122,7 +122,7 @@ function AdminDashboard() {
         {pestana === "pedidos" && (
           <div className="tabla-contenedor">
             <h2>Pedidos por Aprobar</h2>
-            {pedidosPendientes.length === 0 ? <p style={{ textAlign: "center", marginTop: "20px" }}>No hay pedidos pendientes.</p> : (
+            {pedidosPendientes.length === 0 ? <p >No hay pedidos pendientes.</p> : (
               <table className="tabla-admin">
                 <thead>
                   <tr>
@@ -167,7 +167,7 @@ function AdminDashboard() {
         {pestana === "personalizados" && (
           <div className="tabla-contenedor">
             <h2>Solicitudes por Aprobar</h2>
-            {personalizadosPendientes.length === 0 ? <p style={{ textAlign: "center", marginTop: "20px" }}>No hay solicitudes pendientes.</p> : (
+            {personalizadosPendientes.length === 0 ? <p>No hay solicitudes pendientes.</p> : (
               <table className="tabla-admin">
                 <thead>
                   <tr>
@@ -204,7 +204,7 @@ function AdminDashboard() {
         {pestana === "historial" && (
           <div className="tabla-contenedor">
             <h2>Historial de Pedidos Procesados</h2>
-            {totalHistorial === 0 ? <p style={{ textAlign: "center", marginTop: "20px" }}>El historial está vacío.</p> : (
+            {totalHistorial === 0 ? <p>El historial está vacío.</p> : (
               <table className="tabla-admin">
                 <thead>
                   <tr>
