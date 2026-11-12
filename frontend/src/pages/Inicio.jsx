@@ -189,10 +189,11 @@ const cerrarModalNosotros = () => {
               <h2>¿Quienes Somos?</h2>
               <p>Historias Tejidas nació de una idea sencilla: convertir aquello que significa algo para nosotros en algo que podamos conservar.</p>
               <p>Cada creación combina tejido, imaginación y detalles pensados para que cada pieza tenga una historia propia.</p>
-
-              <button className="button" onClick={() => setModalNosotros(true)}>
-                Conoce de nosotros
-            </button>
+              <div className="boton-wrapper">
+                <button className="button" onClick={() => setModalNosotros(true)}>
+                  Conoce de nosotros
+                </button>
+              </div>
             </div>
             
         
