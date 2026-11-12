@@ -4,8 +4,9 @@ import '../style.css';
 import '../css/paginas/admin.css';
 import AdminProductos from '../components/AdminProductos';
 
+
 function AdminDashboard() {
-  // 1. Ahora tenemos 3 pestañas: pedidos, personalizados e historial
+  
   const [pestana, setPestana] = useState("pedidos");
   const [pedidos, setPedidos] = useState([]);
   const [personalizados, setPersonalizados] = useState([]);
@@ -13,29 +14,26 @@ function AdminDashboard() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+    useEffect(() => {
     const token = localStorage.getItem("adminToken");
     if (!token) {
       navigate('/admin'); 
       return;
     }
 
-  
-  
-    const tokenAdmin = localStorage.getItem("adminToken");
-
-  
     Promise.all([
-      fetch(`${import.meta.env.VITE_API_URL}/pedidos`, {
-        headers: { "Authorization": tokenAdmin }
-      }).then(r => r.json()),
-      
-      fetch(`${import.meta.env.VITE_API_URL}/personalizados`, {
-        headers: { "Authorization": tokenAdmin }
-      }).then(r => r.json())
+      fetch(`${import.meta.env.VITE_API_URL}/pedidos`, { headers: { "Authorization": token } }).then(r => {
+        if (!r.ok) return []; 
+        return r.json();
+      }),
+      fetch(`${import.meta.env.VITE_API_URL}/personalizados`, { headers: { "Authorization": token } }).then(r => {
+        if (!r.ok) return []; 
+        return r.json();
+      })
     ]).then(([datosPedidos, datosPersonalizados]) => {
-      setPedidos(datosPedidos);
-      setPersonalizados(datosPersonalizados);
+   
+      setPedidos(Array.isArray(datosPedidos) ? datosPedidos : []);
+      setPersonalizados(Array.isArray(datosPersonalizados) ? datosPersonalizados : []);
       setCargando(false);
     }).catch(err => {
       console.error(err);

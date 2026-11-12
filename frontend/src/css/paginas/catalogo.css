@@ -1,14 +1,20 @@
+
 /*==================================================
 =                 PÁGINA CATÁLOGO                  =
 ==================================================*/
 
-/* ====== BOTONES DE CATEGORÍA ====== */
+
+/*==================================================
+=              BOTONES DE CATEGORÍA                =
+==================================================*/
 
 .nav__catalogo {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: var(--espacio-sm);
+    width: 100%;
 }
 
 .boton-categoria {
@@ -39,7 +45,6 @@
     box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
 }
 
-/* Sin !important: (0,2,0) y posterior a .boton-categoria y .boton-categoria:hover */
 .boton-categoria.nav__a--activo {
     background: var(--frambuesa);
     color: var(--blanco);
@@ -47,7 +52,9 @@
 }
 
 
-/* ====== CONTROLES DEL CATÁLOGO ====== */
+/*==================================================
+=              CONTROLES DEL CATÁLOGO              =
+==================================================*/
 
 .controles {
     display: flex;
@@ -64,84 +71,125 @@
     background-color: var(--rosa-fondo);
     color: var(--rosa-principal);
     font-size: var(--texto);
+    font-family: inherit;
+    box-sizing: border-box;
 }
 
-.buscador:focus {
+.buscador:focus,
+.ordenador:focus {
     outline: none;
     border: 2px solid var(--rosa-principal);
     box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.ordenador:focus {
-    outline: none;
-    border: 2px solid var(--rosa-principal);
-    box-shadow: 0 0 8px rgba(199, 75, 89, 0.3);
-}
 
-/* ====== BÚSQUEDA + CATEGORÍAS ====== */
+/*==================================================
+=              BÚSQUEDA + CATEGORÍAS               =
+==================================================*/
 
 .catalogo__buscadores {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: var(--espacio-sm);
+    gap: var(--espacio-md);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.buscador {
+    flex: 1 1 220px;
+    min-width: 0;
+    min-height: 44px;
+}
+
+.ordenador {
+    flex: 0 1 230px;
+    min-width: 0;
+    min-height: 44px;
+    cursor: pointer;
 }
 
 
-/* ====== PAGINACIÓN ====== */
+/*==================================================
+=                    PAGINACIÓN                    =
+==================================================*/
 
-/* Unificada: antes .paginacion estaba declarada dos veces; se conservan los valores
-   que ya "ganaban" en la cascada (gap 12px, margin-top 40px, align-items, wrap). */
 .paginacion {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    margin-top: 40px;
     flex-wrap: wrap;
+    gap: 8px;
+
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    margin: var(--espacio-xl) auto;
+    padding: var(--espacio-md);
+
+    overflow: visible;
 }
 
-.boton-pagina {
-    background: var(--rosa-palido);
-    border: 2px solid var(--rosa-suave);
-    border-radius: 50%;
-    width: 40px;
+/* Todos los botones de paginación */
+
+.paginacion .btn-pagina {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    min-width: 40px;
     height: 40px;
-    color: var(--rosa-principal);
-    font-weight: var(--negrita);
-    cursor: pointer;
-    transition: background-color var(--transicion), color var(--transicion);
-}
+    padding: 0 12px;
 
-.boton-pagina:hover {
-    background: var(--frambuesa);
-    color: var(--rosa-crema);
-}
-
-.btn-pagina {
     background-color: var(--rosa-palido);
     color: var(--rosa-principal);
-    border: 2px solid var(--rosa-principal);
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
+
+    border: 2px solid var(--rosa-suave);
+    border-radius: var(--radio);
+
+    font-family: inherit;
+    font-size: var(--texto);
     font-weight: var(--negrita);
-    transition: all 0.3s;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicion),
+        color var(--transicion),
+        border-color var(--transicion);
 }
 
-.btn-pagina:hover:not(:disabled) {
-    background-color: var(--rosa-palido);
+/* Botones numéricos */
+
+.paginacion .btn-pagina:not(:first-child):not(:last-child) {
+    width: 40px;
+    padding: 0;
 }
 
-.btn-pagina.activo {
+/* Página activa */
+
+.paginacion .btn-pagina.activo {
     background-color: var(--rosa-principal);
-    color: white;
+    color: var(--blanco);
     border-color: var(--rosa-principal);
 }
 
-.btn-pagina:disabled {
+/* Efecto hover */
+
+.paginacion .btn-pagina:hover:not(:disabled) {
+    background-color: var(--frambuesa);
+    color: var(--blanco);
+    border-color: var(--frambuesa);
+}
+
+/* Botones deshabilitados */
+
+.paginacion .btn-pagina:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
@@ -151,71 +199,111 @@
 =                RESPONSIVE CATÁLOGO               =
 ==================================================*/
 
-/* ===== TABLET ===== */
+/* TABLETS */
+
 @media (max-width: 768px) {
 
-    .nav__catalogo {
-        gap: var(--espacio-xs);
-        margin-bottom: var(--espacio-md);
+    .catalogo__buscadores {
+        gap: var(--espacio-md);
     }
 
-    .boton-categoria {
-        padding: var(--boton-y) var(--boton-x);
-        font-size: 0.95rem;
-    }
-}
-
-/* ===== CELULAR ===== */
-@media (max-width: 480px) {
-
     .nav__catalogo {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        gap: var(--espacio-sm);
+    }
+
+    .paginacion {
         gap: 8px;
-        margin-bottom: var(--espacio-md);
-    }
-
-    .boton-categoria {
-        width: 100%;
-        padding: 10px 8px;
-        font-size: 0.9rem;
-        border-width: 2px;
     }
 }
 
-/* ===== CELULARES MUY PEQUEÑOS ===== */
-@media (max-width: 360px) {
 
-    .nav__catalogo {
-        grid-template-columns: 1fr;
-    }
+/* TELÉFONOS */
 
-    .boton-categoria {
-        font-size: 0.85rem;
-        padding: 9px 6px;
-    }
-}
-
-/* Debe ir después de 480/360 para conservar el orden de cascada original */
 @media (max-width: 600px) {
 
-    .controles {
+    /* Buscador y ordenador */
+
+    .catalogo__buscadores {
         flex-direction: column;
         align-items: stretch;
+        gap: var(--espacio-md);
+        padding: var(--espacio-sm);
     }
 
     .buscador,
     .ordenador {
         width: 100%;
+        flex: none;
+        min-height: 44px;
     }
 
+    /* Categorías */
+
     .nav__catalogo {
-        gap: var(--espacio-xs);
+        justify-content: center;
+        gap: 8px;
+        padding: var(--espacio-xs) 0;
     }
 
     .boton-categoria {
+        padding: 9px 13px;
         font-size: 0.9rem;
-        padding: 0.4rem 0.7rem;
+    }
+
+    /* Paginación */
+
+    .paginacion {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 7px;
+
+        width: 100%;
+        padding: var(--espacio-md) var(--espacio-xs);
+
+        margin: var(--espacio-lg) auto;
+    }
+
+    .paginacion .btn-pagina {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 9px;
+        font-size: 0.85rem;
+    }
+
+    .paginacion .btn-pagina:not(:first-child):not(:last-child) {
+        width: 36px;
+        padding: 0;
+    }
+}
+
+
+/* TELÉFONOS PEQUEÑOS */
+
+@media (max-width: 380px) {
+
+    .nav__catalogo {
+        gap: 6px;
+    }
+
+    .boton-categoria {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    .paginacion {
+        gap: 6px;
+        padding: var(--espacio-sm) 4px;
+    }
+
+    .paginacion .btn-pagina {
+        min-width: 32px;
+        height: 34px;
+        padding: 0 7px;
+        font-size: 0.8rem;
+    }
+
+    .paginacion .btn-pagina:not(:first-child):not(:last-child) {
+        width: 34px;
+        padding: 0;
     }
 }

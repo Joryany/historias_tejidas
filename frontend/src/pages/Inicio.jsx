@@ -1,7 +1,9 @@
 import '../style.css';
 import '../css/paginas/inicio.css';
-import { Link, NavLink } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import { useState } from 'react';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Inicio() {
 
@@ -17,17 +19,8 @@ const cerrarModalNosotros = () => {
 
   return (
     <div>
-      <header>
-        <img src="/logo-sin-texto.png" alt="Logo" />
-        <nav className='navegador_principal'>
-          <NavLink to="/" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Inicio</NavLink>
-          <NavLink to="/catalogo" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Catálogo</NavLink>
-          <NavLink to="/personaliza" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Personaliza</NavLink>
-          <NavLink to="/carrito" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Carrito</NavLink>
-          <NavLink to="/favoritos" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>♥</NavLink>
+      <Header />
         
-        </nav>
-      </header>
 
       <main>
         <div className="hero">
@@ -184,21 +177,25 @@ const cerrarModalNosotros = () => {
               </article>
             </div>
             <div className="cont-link-des">
-              <p>¿Qué estas esperando?</p>
+              <Link to="/catalogo" className="button">¿Qué estas esperando?</Link>
             </div>
           </div>
         </section>
 
         <section className="sobre-nosotros">
-          <div className="sobre-contenido">
+
             <span>Nuestra historia</span>
-            <h2>¿Quienes Somos?</h2>
-            <p>Historias Tejidas nació de una idea sencilla: convertir aquello que significa algo para nosotros en algo que podamos conservar.</p>
-            <p>Cada creación combina tejido, imaginación y detalles pensados para que cada pieza tenga una historia propia.</p>
-            <button className="button" onClick={() => setModalNosotros(true)}>
+            <div className="res-contenido">
+              <h2>¿Quienes Somos?</h2>
+              <p>Historias Tejidas nació de una idea sencilla: convertir aquello que significa algo para nosotros en algo que podamos conservar.</p>
+              <p>Cada creación combina tejido, imaginación y detalles pensados para que cada pieza tenga una historia propia.</p>
+
+              <button className="button" onClick={() => setModalNosotros(true)}>
                 Conoce de nosotros
             </button>
-          </div>
+            </div>
+            
+        
         </section>
 
          <section className="personalizacion">
@@ -215,35 +212,8 @@ const cerrarModalNosotros = () => {
         
       </main>
 
-      <footer>
-        <div className="footer-container">
-          <div className="footer-marca">
-            <img src="/logo-sin-texto.png" alt="Logo de Historias Tejidas" />
-            <h2>Historias Tejidas</h2>
-          </div>
-          <div className="cont-columna">
-            <div className="footer-columna">
-              <h3>Navegación</h3>
-              <Link to="/">Inicio</Link>
-              <Link to="/catalogo">Catálogo</Link>
-              <Link to="/personaliza">Personaliza</Link>
-            </div>
-            <div className="footer-columna">
-              <h3>Ayuda</h3>
-              <a href="#pf">Preguntas frecuentes</a>
-              <Link to="/contacto">Contacto</Link>
-            </div>
-            <div className="footer-columna">
-              <h3>Información</h3>
-              <Link to="/politica-privacidad">Política de privacidad</Link>
-              <Link to="/terminos">Términos y condiciones</Link>
-            </div>
-          </div>
-        </div>
-        <div className="footer-derechos">
-          <p>© 2026 Historias Tejidas. Todos los derechos reservados.</p>
-        </div>
-      </footer>
+      <Footer />
+        
       
 
       

@@ -1,7 +1,9 @@
-
 import { useState, useEffect, useRef } from 'react';
-import { useParams, Link, NavLink } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import TarjetaProducto from '../components/TarjetaProducto';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Toast from '../components/Toast';
 import '../style.css';
 import '../css/paginas/producto-detalle.css';
 
@@ -15,6 +17,10 @@ function ProductoDetalle() {
   const [selecciones, setSelecciones] = useState({});
   const [precioFinal, setPrecioFinal] = useState(0);
 
+  // Estados para el Toast
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMensaje, setToastMensaje] = useState("");
+  const [toastTipo, setToastTipo] = useState("exito");
 
   const carruselRef = useRef(null);
 
@@ -26,8 +32,15 @@ function ProductoDetalle() {
     carruselRef.current.scrollBy({ left: 250, behavior: "smooth" });
   };
 
- 
-  const manejarCambioOpcion = (grupoNombre, item, indexGrupo) => {
+  const mostrarToast = (mensaje, tipo = "exito") => {
+    setToastMensaje(mensaje);
+    setToastTipo(tipo);
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 3000);
+  };
+
+  // Limpiamos los parámetros para que el Linter no se queje
+  const manejarCambioOpcion = (grupoNombre, item) => {
     const nuevasSelecciones = {
       ...selecciones,
       [grupoNombre]: item
@@ -45,12 +58,8 @@ function ProductoDetalle() {
     setPrecioFinal(precioCalculado);
   };
 
-  // ========== FUNCIONES PARA EL CARRITO Y FAVORITOS ==========
-
   const agregarAlCarrito = () => {
-   
     const carritoGuardado = JSON.parse(localStorage.getItem("carritoHT")) || [];
-    
     
     const productoParaCarrito = {
       id: producto.id,
@@ -63,44 +72,32 @@ function ProductoDetalle() {
       selecciones: selecciones 
     };
 
-
     const nuevoCarrito = [...carritoGuardado, productoParaCarrito];
-  
     localStorage.setItem("carritoHT", JSON.stringify(nuevoCarrito));
     
-   
-    alert("¡Añadido al carrito!");
+    mostrarToast("¡Añadido al carrito!"); // Usamos Toast en vez de alert
     setModalAbierto(false);
   };
 
   const toggleFavorito = () => {
-    
     const favoritosGuardados = JSON.parse(localStorage.getItem("favoritosHT")) || [];
-   
     const yaEsFavorito = favoritosGuardados.includes(producto.id);
 
     let nuevosFavoritos;
     if (yaEsFavorito) {
-   
       nuevosFavoritos = favoritosGuardados.filter(id => id !== producto.id);
     } else {
-    // Si no está, lo agregamos
       nuevosFavoritos = [...favoritosGuardados, producto.id];
     }
-
-  
     localStorage.setItem("favoritosHT", JSON.stringify(nuevosFavoritos));
     
-   
     window.location.reload(); 
   };
 
-    useEffect(() => {
+  useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/productos/${id}`)
       .then((respuesta) => {
-        if (!respuesta.ok) {
-          throw new Error("Producto no encontrado");
-        }
+        if (!respuesta.ok) throw new Error("Producto no encontrado");
         return respuesta.json();
       })
       .then((datos) => {
@@ -113,7 +110,7 @@ function ProductoDetalle() {
       });
   }, [id]); 
 
-   useEffect(() => {
+  useEffect(() => {
     if (producto) {
       fetch(`${import.meta.env.VITE_API_URL}/productos`)
         .then((respuesta) => respuesta.json())
@@ -121,8 +118,6 @@ function ProductoDetalle() {
             const filtrados = todos.filter(function(p) {
                 return p.categoria === producto.categoria && p.id !== producto.id;
             });
-            
-            
             const mezclados = [...filtrados].sort(() => Math.random() - 0.5);
             setRelacionados(mezclados.slice(0, 6));
         })
@@ -130,8 +125,7 @@ function ProductoDetalle() {
     }
   }, [producto]); 
 
-
-   if (cargando) {
+  if (cargando) {
     return (
       <div className='mensaje_carga'> 
         <h2>Cargando el producto...</h2>
@@ -149,27 +143,15 @@ function ProductoDetalle() {
     );
   }
 
-
-    return (
+  return (
     <div>
-        <header>
-        <img src="/logo-sin-texto.png" alt="Logo" />
-        <nav className='navegador_principal'>
-          <NavLink to="/" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Inicio</NavLink>
-          <NavLink to="/catalogo" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Catálogo</NavLink>
-          <NavLink to="/personaliza" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Personaliza</NavLink>
-          <NavLink to="/carrito" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Carrito</NavLink>
-          <NavLink to="/favoritos" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>♥</NavLink>
-        
-        </nav>
-      </header>
+      <Toast mensaje={toastMensaje} tipo={toastTipo} visible={toastVisible} />
+      
+      <Header />
 
       <main>
         <div className="producto-pagina">
-          
-
           <section id="producto">
-
               <img 
                 id="imagen" 
                 src={producto.imagen ? `/${producto.imagen.replace("assets/img/", "")}` : "/logo-sin-texto.png"} 
@@ -185,8 +167,6 @@ function ProductoDetalle() {
               </h2>
 
               <div id="btn__producto">
-                
-              
                 <button 
                   id="favorito" 
                   title="Guardar en favoritos" 
@@ -196,39 +176,34 @@ function ProductoDetalle() {
                 </button>
                 
                 <button 
-                className="button" 
-                onClick={() => {
-                  setModalAbierto(true);
-                  
-                 
-                  let precioInicial = producto.precio;
-                  const seleccionesIniciales = {};
+                  className="button" 
+                  onClick={() => {
+                    setModalAbierto(true);
+                    let precioInicial = producto.precio;
+                    const seleccionesIniciales = {};
 
-                  if (producto.opciones) {
-                      producto.opciones.forEach((grupo) => {
-                          const primerItem = grupo.items[0];
-                          seleccionesIniciales[grupo.nombre] = primerItem;
-                          if (primerItem.multiplicador) {
-                              precioInicial = precioInicial * primerItem.multiplicador;
-                          }
-                      });
-                  }
-
-                  setSelecciones(seleccionesIniciales);
-                  setPrecioFinal(precioInicial);
-                }}
-              >
-                Comprar
-              </button>
+                    if (producto.opciones) {
+                        producto.opciones.forEach((grupo) => {
+                            const primerItem = grupo.items[0];
+                            seleccionesIniciales[grupo.nombre] = primerItem;
+                            if (primerItem.multiplicador) {
+                                precioInicial = precioInicial * primerItem.multiplicador;
+                            }
+                        });
+                    }
+                    setSelecciones(seleccionesIniciales);
+                    setPrecioFinal(precioInicial);
+                  }}
+                >
+                  Comprar
+                </button>
 
                 <Link to={`/personaliza/${producto.id}`} className="button">
                   Personalizar
                 </Link>
-
               </div>
 
               <div id="producto__container--especificaciones">
-                  
                   <div className="container__especificaciones--elemento">
                   <h3>La historia detrás del tejido</h3>
                   <p id="historia__p">{producto.historia}</p>
@@ -238,13 +213,12 @@ function ProductoDetalle() {
                   <h4>Materiales del amigurumi</h4>
                   <p id="materiales__p">{producto.materiales}</p>
                   </div>
-
               </div>
             </div>
           </section>
+
           <section className="gustar">
             <h2>También te podría gustar</h2>
-            
             <div className="carrusel-wrapper">
               <button className="btn-flecha" onClick={moverIzquierda}>←</button>
               
@@ -277,18 +251,19 @@ function ProductoDetalle() {
               
               <h2>Personaliza tu {producto.nombre}</h2>
               
+              {/* AQUÍ ESTÁ EL CAMBIO PARA EL LINTER */}
               {producto.opciones && producto.opciones.length > 0 ? (
-                producto.opciones.map((grupo, indexGrupo) => (
-                  <div className="grupo-modal" key={indexGrupo}>
+                producto.opciones.map((grupo) => (
+                  <div className="grupo-modal" key={grupo.nombre}>
                     <h3>{grupo.nombre}</h3>
-                    {grupo.items.map((item, indexItem) => (
-                      <label className="opcion-modal" key={indexItem}>
+                    {grupo.items.map((item) => (
+                      <label className="opcion-modal" key={item.value}>
                         <input 
                           type="radio" 
-                          name={`grupo-${indexGrupo}`} 
+                          name={`grupo-${grupo.nombre}`} 
                           value={item.value}
-                          defaultChecked={indexItem === 0}
-                          onChange={() => manejarCambioOpcion(grupo.nombre, item, indexGrupo)} 
+                          defaultChecked={item.defecto === true}
+                          onChange={() => manejarCambioOpcion(grupo.nombre, item)} 
                         />
                         {item.nombre} 
                       </label>
@@ -310,43 +285,8 @@ function ProductoDetalle() {
           </div>
         )}
       </main>
-      <footer>
-        <div className="footer-container">
-
-          <div className="footer-marca">
-            <img src="/logo-sin-texto.png" alt="Logo de Historias Tejidas"/>
-            <h2>Historias Tejidas</h2>
-          </div>
-
-          <div className="cont-columna">
-
-            <div className="footer-columna">
-              <h3>Navegación</h3>
-              <Link to="/">Inicio</Link>
-              <Link to="/catalogo">Catálogo</Link>
-              <Link to="/personaliza">Personaliza</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Ayuda</h3>
-              {/* Este se queda como <a> porque apunta a un ancla interna (#pf) */}
-              <a href="#pf">Preguntas frecuentes</a>
-              <Link to="/contacto">Contacto</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Información</h3>
-              <Link to="/politica-privacidad">Política de privacidad</Link>
-              <Link to="/terminos">Términos y condiciones</Link>
-            </div>
-            
-          </div>
-        </div>
-
-        <div className="footer-derechos">
-          <p>© 2026 Historias Tejidas. Todos los derechos reservados.</p>
-        </div>
-      </footer>
+      
+      <Footer />
     </div>    
   );
 }

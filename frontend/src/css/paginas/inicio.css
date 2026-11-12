@@ -492,6 +492,20 @@
 }
 
 
+.propuesta-valor > .section-label,
+.destacados > span,
+.categorias > span,
+.funciona > span,
+.reseñas > span,
+.sobre-nosotros > span,
+.personalizacion > span {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 12px 0;
+    line-height: 1.4;
+}
+
 /*==================================================
 =             ANIMACIÓN DE APERTURA                 =
 ==================================================*/

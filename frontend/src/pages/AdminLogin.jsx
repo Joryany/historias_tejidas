@@ -13,7 +13,6 @@ function AdminLogin() {
   const manejarLogin = (e) => {
     e.preventDefault();
     
-
     fetch(`${import.meta.env.VITE_API_URL}/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -30,7 +29,8 @@ function AdminLogin() {
         localStorage.setItem("adminToken", datos.token);
         navigate('/admin/panel');
       })
-      .catch(error => {
+      
+      .catch(() => {
         setError("Usuario o contraseña incorrectos.");
       });
   };
@@ -42,16 +42,18 @@ function AdminLogin() {
         <p>Ingresa tus credenciales para gestionar la tienda.</p>
 
         <form onSubmit={manejarLogin} className="admin-form">
-          <label>Usuario:</label>
+          <label htmlFor="admin-user">Usuario:</label>
           <input 
+            id="admin-user"
             type="text" 
             value={usuario} 
             onChange={(e) => setUsuario(e.target.value)} 
             required 
           />
 
-          <label>Contraseña:</label>
+          <label htmlFor="admin-pass">Contraseña:</label>
           <input 
+            id="admin-pass"
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 

@@ -2,15 +2,20 @@ import { useState, useEffect } from 'react';
 import TarjetaProducto from '../components/TarjetaProducto';
 import '../style.css';
 import '../css/paginas/catalogo.css';
-import { useSearchParams, Link, NavLink } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Toast from '../components/Toast';
 
 function mezclarAleatoriamente(array) {
   return [...array].sort(() => Math.random() - 0.5);
 }
 
 function Catalogo() {
- const [cargando, setCargando] = useState(true); 
-  const [productos, setProductos] = useState([]);   
+  const [cargando, setCargando] = useState(true); 
+  const [productos, setProductos] = useState([]);  
+  
+  const [toast, setToast] = useState({ visible: false, mensaje: "", tipo: "error" });
   
 
   const [searchParams] = useSearchParams();
@@ -25,22 +30,24 @@ function Catalogo() {
   const PRODUCTOS_POR_PAGINA = 9; 
 
 
-  useEffect(() => {
-    setCategoriaActual(categoriaURL);
-    setPaginaActual(1);
-  }, [categoriaURL]);
-
-   useEffect(() => {
+ 
+    useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/productos`)
-      .then((respuesta) => respuesta.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al cargar");
+        return res.json();
+      })
       .then((datos) => {
         const datosMezclados = mezclarAleatoriamente(datos);
-        setProductos(datosMezclados); 
-        setCargando(false);    
+        setProductos(datosMezclados);
+        setCargando(false);
       })
       .catch((error) => {
         console.error("Error al cargar los productos", error);
         setCargando(false);
+        
+        
+        setToast({ visible: true, mensaje: "No pudimos conectar con la tienda.", tipo: "error" });
       });
   }, []);
 
@@ -51,6 +58,8 @@ function Catalogo() {
     <h2>Cargando los productos...</h2>
     <h3>Agradecemos su paciencia.</h3>
     </div>
+
+    
   }
 
    let productosAMostrar = productos;
@@ -88,16 +97,11 @@ function Catalogo() {
 
   return (
     <div>
-      <header>
-        <img src="/logo-sin-texto.png" alt="Logo" />
-        <nav className='navegador_principal'>
-          <NavLink to="/" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Inicio</NavLink>
-          <NavLink to="/catalogo" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Catálogo</NavLink>
-          <NavLink to="/personaliza" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Personaliza</NavLink>
-          <NavLink to="/carrito" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Carrito</NavLink>
-          <NavLink to="/favoritos" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>♥</NavLink>
-        </nav>
-      </header>
+    
+      <Toast mensaje={toast.mensaje} tipo={toast.tipo} visible={toast.visible} />
+     
+      <Header />
+        
 
        <main>
         <section className="hero">
@@ -203,7 +207,7 @@ function Catalogo() {
                 ← Anterior
               </button>
 
-              {/* Generamos un botón por cada página */}
+             
               {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((numeroPagina) => (
                 <button
                   key={numeroPagina}
@@ -226,42 +230,8 @@ function Catalogo() {
         </div>
       </main>
 
-      <footer>
-        <div className="footer-container">
-
-          <div className="footer-marca">
-            <img src="/logo-sin-texto.png" alt="Logo de Historias Tejidas" />
-            <h2>Historias Tejidas</h2>
-          </div>
-
-          <div className="cont-columna">
-
-            <div className="footer-columna">
-              <h3>Navegación</h3>
-              <Link to="/">Inicio</Link>
-              <Link to="/catalogo">Catálogo</Link>
-              <Link to="/personaliza">Personaliza</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Ayuda</h3>
-              <a href="#pf">Preguntas frecuentes</a>
-              <Link to="/contacto">Contacto</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Información</h3>
-              <Link to="/politica-privacidad">Política de privacidad</Link>
-              <Link to="/terminos">Términos y condiciones</Link>
-            </div>
-            
-          </div>
-        </div>
-
-        <div className="footer-derechos">
-          <p>© 2026 Historias Tejidas. Todos los derechos reservados.</p>
-        </div>
-      </footer>
+      <Footer />
+        
     </div>
   )
 }

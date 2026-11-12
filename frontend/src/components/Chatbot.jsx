@@ -35,7 +35,7 @@ function Chatbot() {
                 <p>«¡Hola! Soy Mimí. 💗 ¿Buscas un detalle tejido, un regalo especial o algo bonito para ti? ¡Te ayudo a encontrar lo que buscas!»</p>
                 <button className="chat-btn" onClick={() => setPantalla("opciones")}>Buscar un detalle</button>
                 <button className="chat-btn" onClick={() => setPantalla("faq_menu")}>Tengo una duda</button>
-                <a href="https://wa.me/573000000000" target="_blank" rel="noreferrer" className="chat-btn btn-wa">Hablar con un Asesor</a>
+                <a href="https://wa.me/573247745820" target="_blank" rel="noreferrer" className="chat-btn btn-wa">Hablar con un Asesor</a>
               </div>
             )}
 

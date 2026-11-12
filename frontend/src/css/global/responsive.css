@@ -1,13 +1,17 @@
+
 /*==================================================
-=             RESPONSIVE GLOBAL                    =         =
+=             RESPONSIVE GLOBAL                    =
 ==================================================*/
 
+/*==================================================
+=              TABLETS Y ESCRITORIO                =
+==================================================*/
 
+@media (min-width: 769px) {
 
-/* Tablet: a partir de 768px */
-@media (min-width: 768px) {
+    /* Encabezados generales, excepto el principal */
 
-    header {
+    header:not(.encabezado-principal) {
         flex-direction: row;
         justify-content: space-between;
         text-align: left;
@@ -15,26 +19,246 @@
     }
 }
 
-/* Móvil grande: menos relleno lateral para que el contenido aproveche el ancho */
+
+/*==================================================
+=                  MÓVIL GRANDE                    =
+==================================================*/
+
 @media (max-width: 600px) {
 
     section {
         padding: var(--espacio-md);
     }
+
+    /* Hero: conserva su distribución */
+
+    section.hero {
+        padding: 45px 22px;
+    }
+
+    .hero .container {
+        width: 100%;
+    }
+
+    .hero p br {
+        display: none;
+    }
+
+    .button-hero {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .button-hero a {
+        width: 100%;
+    }
 }
 
-/* Móvil: hasta 480px */
+
+/*==================================================
+=                    MÓVILES                       =
+==================================================*/
+
 @media (max-width: 480px) {
 
-    header {
+    header:not(.encabezado-principal) {
         gap: var(--espacio-md);
     }
 
-    header img {
+    header:not(.encabezado-principal) img {
         width: 56px;
     }
 
     .carrito-vacio {
         padding: var(--espacio-lg) var(--espacio-md);
+    }
+}
+
+
+/*==================================================
+=                MENÚ MÓVIL Y TABLET               =
+==================================================*/
+
+@media (max-width: 768px) {
+
+    /* Barra superior */
+
+    header.encabezado-principal {
+        padding: var(--espacio-sm) var(--espacio-md);
+        gap: var(--espacio-md);
+    }
+
+    header.encabezado-principal .header-logo img {
+        width: 52px;
+    }
+
+    /* Botón hamburguesa */
+
+    .navegador_menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 44px;
+        height: 44px;
+
+        border: 1px solid var(--rosa-palido);
+        border-radius: var(--radio);
+        background: var(--rosa-palido);
+
+        color: var(--rosa-principal);
+        font-size: 1.7rem;
+        cursor: pointer;
+
+        transition: var(--transicion);
+    }
+
+    .navegador_menu-toggle:hover {
+        background: var(--rosa-principal);
+        color: white;
+    }
+
+    /* Fondo del modal */
+
+    .navegador_modal-fondo {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+
+        background: rgba(74, 20, 28, 0.48);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+
+    /* Menú cerrado */
+
+    header.encabezado-principal .navegador_principal {
+        display: none;
+    }
+
+    /* Menú abierto */
+
+    header.encabezado-principal .navegador_principal.navegador_principal--abierto {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+
+        transform: translate(-50%, -50%);
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        width: min(88%, 380px);
+        max-height: calc(100dvh - 40px);
+        overflow-y: auto;
+
+        padding: var(--espacio-xl);
+        gap: var(--espacio-md);
+
+        background: var(--rosa-crema);
+        border: 1px solid var(--rosa-palido);
+        border-radius: 1.5rem;
+        box-shadow: var(--sombra-grande);
+    }
+
+    /* Enlaces */
+
+    header.encabezado-principal .navegador_principal--abierto a {
+        display: block;
+        width: 100%;
+        max-width: none;
+
+        padding: var(--espacio-md);
+        text-align: center;
+
+        border-radius: var(--radio);
+        font-size: 1rem;
+    }
+
+    /* Botón cerrar */
+
+    .navegador_cerrar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        align-self: flex-end;
+
+        width: 36px;
+        height: 36px;
+
+        border: none;
+        border-radius: 50%;
+        background: var(--rosa-palido);
+
+        color: var(--rosa-principal);
+        font-size: 1.7rem;
+        line-height: 1;
+
+        cursor: pointer;
+        transition: var(--transicion);
+    }
+
+    .navegador_cerrar:hover {
+        background: var(--rosa-principal);
+        color: white;
+    }
+}
+
+
+/*==================================================
+=                 MÓVILES PEQUEÑOS                 =
+==================================================*/
+
+@media (max-width: 380px) {
+
+    header.encabezado-principal {
+        padding: var(--espacio-sm);
+    }
+
+    header.encabezado-principal .header-logo img {
+        width: 46px;
+    }
+
+    header.encabezado-principal .navegador_principal.navegador_principal--abierto {
+        width: 92%;
+        padding: var(--espacio-lg);
+    }
+
+    /* Hero */
+
+    section.hero {
+        padding: 35px 18px;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero h2 {
+        font-size: 1.05rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+}
+
+
+/*==================================================
+=                  ACCESIBILIDAD                   =
+==================================================*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    header.encabezado-principal *,
+    .navegador_modal-fondo,
+    .hero *,
+    .button-hero a {
+        transition: none !important;
     }
 }

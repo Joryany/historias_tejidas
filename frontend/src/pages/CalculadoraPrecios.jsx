@@ -90,7 +90,7 @@ function CalculadoraPrecios() {
   const [tipoMargen, setTipoMargen] = useState("markup"); // "markup" o "margen"
   const [porcentajeGanancia, setPorcentajeGanancia] = useState(0.40); // 40%
 
-  let precioSugerido = 0;
+   let precioSugerido;
   if (tipoMargen === "markup") {
     precioSugerido = costoTotalUnidad * (1 + porcentajeGanancia);
   } else {
@@ -105,7 +105,7 @@ function CalculadoraPrecios() {
   if (redondearA > 0) {
     precioFinal = Math.ceil(precioSugerido / redondearA) * redondearA;
   }
-  const gananciaFinal = precioFinal - costoTotalUnidad;
+  
 
   return (
     <div className="admin-dashboard">
@@ -132,7 +132,7 @@ function CalculadoraPrecios() {
           <div className="tabla-contenedor seccion-calculadora">
             <h2>2. Materiales e Insumos</h2>
             {materiales.map((mat, i) => (
-              <div key={i} className="calculadora-material-row">
+              <div key={`material-${i}`} className="calculadora-material-row">
                 <div className="calculadora-input-group input-grande">
                   <label className="calculadora-label">Material</label>
                   <input type="text" value={mat.nombre} onChange={(e) => actualizarMaterial(i, "nombre", e.target.value)} className="calculadora-input" placeholder="Lana" />
@@ -166,7 +166,7 @@ function CalculadoraPrecios() {
           <div className="tabla-contenedor seccion-calculadora">
             <h2>3. Herramientas (Desgaste)</h2>
             {herramientas.map((herr, i) => (
-              <div key={i} className="calculadora-material-row">
+              <div key={`herramienta-${i}`} className="calculadora-material-row">
                 <div className="calculadora-input-group input-grande">
                   <label className="calculadora-label">Herramienta</label>
                   <input type="text" value={herr.nombre} onChange={(e) => actualizarHerramienta(i, "nombre", e.target.value)} className="calculadora-input" placeholder="Tijeras" />
@@ -244,7 +244,7 @@ function CalculadoraPrecios() {
           <div className="tabla-contenedor seccion-calculadora">
             <h2>6. Empaque y Presentación</h2>
             {empaques.map((emp, i) => (
-              <div key={i} className="calculadora-material-row">
+              <div key={`empaque-${i}`} className="calculadora-material-row">
                 <div className="calculadora-input-group input-grande">
                   <label className="calculadora-label">Empaque</label>
                   <input type="text" value={emp.nombre} onChange={(e) => actualizarEmpaque(i, "nombre", e.target.value)} className="calculadora-input" placeholder="Bolsa" />
@@ -283,7 +283,7 @@ function CalculadoraPrecios() {
             <hr style={{ margin: "20px 0", borderColor: "var(--rosa-suave)" }} />
             
             {extras.map((ext, i) => (
-              <div key={i} className="calculadora-material-row">
+              <div key={`extra-${i}`} className="calculadora-material-row">
                 <div className="calculadora-input-group input-grande">
                   <label className="calculadora-label">Gasto</label>
                   <input type="text" value={ext.nombre} onChange={(e) => actualizarExtra(i, "nombre", e.target.value)} className="calculadora-input" placeholder="Comisión" />

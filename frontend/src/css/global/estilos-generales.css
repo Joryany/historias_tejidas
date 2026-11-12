@@ -558,3 +558,327 @@ main {
 .button:hover::after {
   left: 100%; /* La luz cruza el botón */
 }
+
+
+/*==================================================
+=          HEADER Y NAVEGACIÓN ACTUALIZADOS        =
+==================================================*/
+
+/* ---------- Barra principal ---------- */
+
+header.encabezado-principal {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: var(--espacio-sm) var(--espacio-xl);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--rosa-crema);
+    box-shadow: var(--sombra-pequeña);
+    text-align: left;
+    isolation: isolate;
+}
+
+/* Logo */
+
+header.encabezado-principal .header-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+header.encabezado-principal .header-logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ---------- Navegación escritorio ---------- */
+
+header.encabezado-principal .navegador_principal {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+}
+
+header.encabezado-principal .navegador_principal a {
+    padding: var(--boton-y) var(--boton-x);
+    border-radius: var(--radio);
+    background: var(--rosa-palido);
+    border: 1px solid var(--rosa-suave);
+
+    color: var(--rosa-principal);
+    font-weight: var(--negrita);
+    text-decoration: none;
+
+    transition: var(--transicion);
+}
+
+header.encabezado-principal .navegador_principal a:hover {
+    background: var(--rosa-principal);
+    color: var(--rosa-crema);
+    transform: translateY(-2px);
+}
+
+/* Página activa */
+
+header.encabezado-principal .navegador_principal a.nav__a--activo {
+    background: var(--frambuesa);
+    color: var(--blanco);
+    border-color: var(--frambuesa);
+}
+
+/* Botones exclusivos del menú móvil */
+
+.navegador_menu-toggle,
+.navegador_cerrar {
+    display: none;
+}
+
+
+
+
+/*==================================================
+=                    HERO GLOBAL                   =
+==================================================*/
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    min-height: 430px;
+    padding: clamp(40px, 7vw, 90px) clamp(20px, 7vw, 100px);
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Imagen de fondo */
+
+.hero > img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center right;
+}
+
+/* Capa para mejorar la lectura */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255, 245, 247, 0.98) 0%,
+        rgba(255, 245, 247, 0.90) 42%,
+        rgba(255, 245, 247, 0.40) 100%
+    );
+}
+
+/* Contenido */
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 650px;
+    margin: 0;
+}
+
+.hero h1 {
+    max-width: 650px;
+    margin: 10px 0;
+
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.15;
+    overflow-wrap: break-word;
+}
+
+.hero h2 {
+    margin: 0 0 12px;
+
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    line-height: 1.3;
+}
+
+.hero p {
+    max-width: 550px;
+    margin: 15px 0;
+
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    line-height: 1.7;
+}
+
+/* Botones del Hero */
+
+.button-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacio-md);
+
+    margin-top: var(--espacio-lg);
+}
+
+.button-hero a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 44px;
+    padding: 12px 22px;
+
+    border-radius: var(--radio);
+    background: var(--rosa-principal);
+    color: white;
+
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+
+    transition: var(--transicion);
+}
+
+.button-hero a:hover {
+    background: var(--frambuesa);
+    transform: translateY(-2px);
+}
+
+
+/*==================================================
+=                  HERO RESPONSIVE                 =
+==================================================*/
+
+/* Tablets */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: 380px;
+        padding: 55px 35px;
+    }
+
+    .hero .container {
+        max-width: 560px;
+    }
+
+    .hero-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(255, 245, 247, 0.97) 0%,
+            rgba(255, 245, 247, 0.88) 65%,
+            rgba(255, 245, 247, 0.55) 100%
+        );
+    }
+}
+
+
+/* Móviles */
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 350px;
+        padding: 45px 22px;
+
+        align-items: center;
+    }
+
+    .hero > img {
+        object-position: 65% center;
+    }
+
+    .hero-overlay {
+        background: rgba(255, 245, 247, 0.83);
+    }
+
+    .hero .container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 7vw, 2.4rem);
+        line-height: 1.2;
+        margin: 8px 0;
+    }
+
+    .hero h2 {
+        font-size: 1.15rem;
+        line-height: 1.35;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 12px 0;
+    }
+
+    /* Evita saltos de línea forzados en pantallas pequeñas */
+
+    .hero p br {
+        display: none;
+    }
+
+    /* Botones uno debajo del otro */
+
+    .button-hero {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--espacio-sm);
+
+        width: 100%;
+        margin-top: var(--espacio-md);
+    }
+
+    .button-hero a {
+        width: 100%;
+        padding: 12px 16px;
+    }
+}
+
+
+/* Móviles pequeños */
+
+@media (max-width: 380px) {
+
+    .hero {
+        min-height: 330px;
+        padding: 35px 18px;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero h2 {
+        font-size: 1.05rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+}

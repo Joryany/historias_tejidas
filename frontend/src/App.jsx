@@ -11,6 +11,13 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import Chatbot from './components/Chatbot';
 import CalculadoraPrecios from './pages/CalculadoraPrecios';
+import Terminos from './pages/Terminos';
+import PoliticaPrivacidad from './pages/PoliticaPrivacidad';
+import Contacto from './pages/Contacto';
+import PreguntasFrecuentes from './pages/PreguntasFrecuentes';
+
+
+
 
 function App() {
 
@@ -44,12 +51,20 @@ function App() {
         <Route path="/producto/:id" element={<ProductoDetalle />} />
 
         <Route path="/favoritos" element={<Favoritos />} />
+
+        <Route path="/terminos" element={<Terminos />} />
+        <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
         
             
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/panel" element={<AdminDashboard />} />
 
         <Route path="/admin/calculadora" element={<CalculadoraPrecios />} />
+
+        
         
       </Routes>
 

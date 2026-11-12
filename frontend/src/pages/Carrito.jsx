@@ -14,7 +14,6 @@ function Carrito() {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [enviado, setEnviado] = useState(false);
   
-  // AQUÍ ESTÁ LA MAGIA DEL AUTOCOMPLETADO:
   const [nombre, setNombre] = useState(() => {
     const cliente = JSON.parse(localStorage.getItem("clienteHT"));
     return cliente?.nombre || "";
@@ -33,6 +32,7 @@ function Carrito() {
 
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMensaje, setToastMensaje] = useState("");
+  const [toastTipo, setToastTipo] = useState("exito");
 
   const actualizarCarrito = (nuevoCarrito) => {
     setCarrito(nuevoCarrito);
@@ -79,19 +79,19 @@ function Carrito() {
     })
       .then((respuesta) => {
         if (respuesta.ok) {
-          // GUARDAMOS LOS DATOS DEL CLIENTE PARA LA PRÓXIMA VEZ
           localStorage.setItem("clienteHT", JSON.stringify({ nombre, whatsapp, lugar }));
-
           setEnviado(true);
           localStorage.removeItem("carritoHT");
           setCarrito([]);
           
           setToastMensaje("¡Pedido enviado con éxito!");
+          setToastTipo("exito");
           setToastVisible(true);
           setTimeout(() => setToastVisible(false), 4000);
 
         } else {
           setToastMensaje("Hubo un error al enviar el pedido. Intenta de nuevo.");
+          setToastTipo("error");
           setToastVisible(true);
           setTimeout(() => setToastVisible(false), 4000);
         }
@@ -99,6 +99,7 @@ function Carrito() {
       .catch((error) => {
         console.error("Error:", error);
         setToastMensaje("Error de conexión. Revisa tu internet.");
+        setToastTipo("error");
         setToastVisible(true);
         setTimeout(() => setToastVisible(false), 4000);
       });
@@ -106,7 +107,7 @@ function Carrito() {
 
   return (
     <div>
-      <Toast mensaje={toastMensaje} tipo={toastVisible ? "exito" : "error"} visible={toastVisible} />
+      <Toast mensaje={toastMensaje} tipo={toastTipo} visible={toastVisible} />
 
       <header>
         <img src="/logo-sin-texto.png" alt="Logo" />
@@ -133,13 +134,14 @@ function Carrito() {
             <h2>Datos de contacto</h2>
             <p>Total a pagar: <strong>${total.toLocaleString("es-CO")} COP</strong></p>
 
-            <label>Nombre completo:</label>
-            <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+            <label htmlFor="nombre-cliente">Nombre completo:</label>
+            <input id="nombre-cliente" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
 
-            <label>WhatsApp:</label>
+            <label htmlFor="whatsapp-cliente">WhatsApp:</label>
             <div className="input-con-prefijo">
               <span className="prefijo">+57</span>
               <input 
+                id="whatsapp-cliente"
                 type="tel" 
                 value={whatsapp} 
                 onChange={(e) => {
@@ -157,11 +159,12 @@ function Carrito() {
             </div>
             {errorWhatsapp && <span className="error-mensaje">{errorWhatsapp}</span>}
 
-            <label>Fecha deseada de entrega:</label>
-            <Calendario fecha={fecha} setFecha={setFecha} />
+            <label htmlFor="fecha-cliente">Fecha deseada de entrega:</label>
+            <Calendario id="fecha-cliente" fecha={fecha} setFecha={setFecha} />
 
-            <label>Dirección de entrega:</label>
+            <label htmlFor="direccion-cliente">Dirección de entrega:</label>
             <input 
+              id="direccion-cliente"
               type="text" 
               value={lugar} 
               onChange={(e) => setLugar(e.target.value)} 
@@ -181,7 +184,6 @@ function Carrito() {
                   title="Mapa de entrega"
                   width="100%"
                   height="200"
-                  style={{ border: 0, borderRadius: "10px", marginTop: "10px" }}
                   loading="lazy"
                   src={`https://maps.google.com/maps?q=${encodeURIComponent(lugar + ", Colombia")}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
                 ></iframe>
@@ -209,7 +211,7 @@ function Carrito() {
           <div>
             <div className="lista-carrito">
               {carrito.map((item, index) => (
-                <div key={index} className="item-carrito">
+                <div key={`${item.id}-${index}`} className="item-carrito">
                   
                   <img 
                     src={item.imagen ? `/${item.imagen.replace("assets/img/", "")}` : "/logo-sin-texto.png"} 
@@ -250,34 +252,6 @@ function Carrito() {
       </main>
 
       <footer>
-        <div className="footer-container">
-          <div className="footer-marca">
-            <img src="/logo-sin-texto.png" alt="Logo de Historias Tejidas" />
-            <h2>Historias Tejidas</h2>
-          </div>
-
-          <div className="cont-columna">
-            <div className="footer-columna">
-              <h3>Navegación</h3>
-              <Link to="/">Inicio</Link>
-              <Link to="/catalogo">Catálogo</Link>
-              <Link to="/personaliza">Personaliza</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Ayuda</h3>
-              <a href="#pf">Preguntas frecuentes</a>
-              <Link to="/contacto">Contacto</Link>
-            </div>
-
-            <div className="footer-columna">
-              <h3>Información</h3>
-              <Link to="/politica-privacidad">Política de privacidad</Link>
-              <Link to="/terminos">Términos y condiciones</Link>
-            </div>
-          </div>
-        </div>
-
         <div className="footer-derechos">
           <p>© 2026 Historias Tejidas. Todos los derechos reservados.</p>
         </div>

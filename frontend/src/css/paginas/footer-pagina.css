@@ -1,0 +1,352 @@
+
+/*==================================================
+=                   PÁGINAS LEGALES                =
+==================================================*/
+
+.pagina-legal {
+    width: 100%;
+    min-height: 80vh;
+    padding: clamp(2rem, 5vw, 3.75rem) var(--espacio-md);
+    background-color: var(--rosa-fondo);
+}
+
+/* ---------- Contenedor principal ---------- */
+
+.legal-contenedor {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: var(--sombra-pequeña);
+}
+
+/* ---------- Títulos ---------- */
+
+.legal-contenedor h1 {
+    color: var(--rosa-principal);
+    text-align: center;
+    font-size: var(--titulo-2);
+    font-weight: var(--negrita);
+    margin-bottom: var(--espacio-xs);
+    line-height: 1.3;
+}
+
+.fecha-actualizacion {
+    color: var(--rosa-oscuro);
+    opacity: 0.75;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: var(--espacio-xl);
+}
+
+/* ---------- Secciones ---------- */
+
+.legal-contenedor section {
+    max-width: none;
+    margin: 0 0 var(--espacio-lg);
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.legal-contenedor h2 {
+    color: var(--rosa-principal);
+    text-align: left;
+    font-size: var(--titulo-4);
+    font-weight: var(--negrita);
+    margin: 0 0 var(--espacio-xs);
+    text-shadow: none;
+}
+
+.legal-contenedor p {
+    color: var(--rosa-oscuro);
+    font-size: var(--texto);
+    line-height: 1.8;
+    margin-bottom: var(--espacio-sm);
+}
+
+/*==================================================
+=              PREGUNTAS FRECUENTES                =
+==================================================*/
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+}
+
+/* Cada pregunta */
+
+.faq-list details {
+    background: var(--rosa-fondo);
+    border: 1px solid var(--rosa-palido);
+    border-radius: 1rem;
+    padding: var(--espacio-md) var(--espacio-lg);
+    transition: background-color var(--transicion),
+                border-color var(--transicion);
+}
+
+/* Pregunta */
+
+.faq-list summary {
+    color: var(--vino-rosa);
+    font-size: var(--texto);
+    font-weight: var(--negrita);
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 2rem;
+}
+
+/* Ocultar marcador predeterminado */
+
+.faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Indicador desplegable */
+
+.faq-list summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--rosa-principal);
+    font-size: 1.4rem;
+    font-weight: var(--negrita);
+    transition: transform var(--transicion);
+}
+
+/* Estado abierto */
+
+.faq-list details[open] {
+    background: #fff8f6;
+    border-color: var(--rosa-suave);
+}
+
+.faq-list details[open] summary {
+    color: var(--rosa-principal);
+}
+
+.faq-list details[open] summary::after {
+    content: "−";
+}
+
+/* Respuesta */
+
+.faq-list details p {
+    margin: var(--espacio-md) 0 0;
+    padding-top: var(--espacio-sm);
+    border-top: 1px solid var(--rosa-palido);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/*==================================================
+=                      CONTACTO                    =
+==================================================*/
+
+.contacto-contenedor {
+    max-width: 750px;
+}
+
+/* Información de contacto */
+
+.contacto-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--espacio-sm);
+}
+
+.contacto-info h2 {
+    text-align: center;
+    margin: var(--espacio-sm) 0;
+    font-size: var(--titulo-3);
+}
+
+.contacto-info p {
+    text-align: center;
+    margin: 0;
+}
+
+/* Botones de contacto */
+
+.contacto-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--espacio-md);
+    width: 100%;
+    margin: var(--espacio-lg) 0;
+}
+
+.contacto-botones a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.9rem 1.8rem;
+    border-radius: var(--radio-pill);
+    text-decoration: none;
+    font-weight: var(--negrita);
+    transition: transform var(--transicion),
+                background-color var(--transicion),
+                color var(--transicion);
+}
+
+
+
+.whatsapp {
+    background-color: var(--frambuesa);
+    color: var(--blanco);
+}
+
+
+/* =========================================
+   HORARIO DE ATENCIÓN
+========================================= */
+
+.horario-destacado {
+    background: linear-gradient(
+        135deg,
+        var(--rosa-fondo),
+        var(--rosa-palido)
+    );
+
+    padding: 24px 26px;
+    margin: 24px 0;
+
+    border-left: 5px solid var(--rosa-principal);
+    border-radius: 12px;
+
+    text-align: left;
+    box-shadow: var(--sombra-suave);
+
+    transition: var(--transicion);
+}
+
+/* Título */
+
+.horario-destacado h3 {
+    color: var(--rosa-principal);
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--rosa-suave);
+}
+
+/* Texto del horario */
+
+.horario-destacado p {
+    color: var(--rosa-oscuro);
+    font-size: 0.98rem;
+    line-height: 1.7;
+
+    margin: 7px 0;
+}
+
+/* Información destacada */
+
+.horario-destacado strong {
+    color: var(--rosa-principal);
+    font-weight: 700;
+}
+
+/* Adaptación móvil */
+
+@media (max-width: 600px) {
+    .horario-destacado {
+        padding: 18px;
+        margin: 18px 0;
+        border-left-width: 4px;
+    }
+
+    .horario-destacado h3 {
+        font-size: 1.1rem;
+    }
+
+    .horario-destacado p {
+        font-size: 0.93rem;
+    }
+}
+
+
+/*==================================================
+=                    RESPONSIVE                    =
+==================================================*/
+
+/* Tablets */
+
+@media (max-width: 768px) {
+
+    .pagina-legal {
+        padding: var(--espacio-lg) var(--espacio-md);
+    }
+
+    .legal-contenedor {
+        border-radius: 1.5rem;
+    }
+
+    .contacto-botones {
+        gap: var(--espacio-sm);
+    }
+}
+
+/* Móviles */
+
+@media (max-width: 480px) {
+
+    .pagina-legal {
+        padding: var(--espacio-md) var(--espacio-sm);
+    }
+
+    .legal-contenedor {
+        padding: var(--espacio-lg) var(--espacio-md);
+        border-radius: 1.25rem;
+    }
+
+    .legal-contenedor h1 {
+        font-size: 1.7rem;
+    }
+
+    .legal-contenedor h2 {
+        font-size: 1.15rem;
+    }
+
+    .legal-contenedor p {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    .faq-list details {
+        padding: var(--espacio-md);
+    }
+
+    .faq-list summary {
+        font-size: 0.92rem;
+    }
+
+    .faq-list details p {
+        font-size: 0.9rem;
+    }
+
+    .contacto-botones {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .contacto-botones a {
+        width: 100%;
+        max-width: 280px;
+    }
+}
