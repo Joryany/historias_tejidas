@@ -1,4 +1,4 @@
-# Historias Tejidas 🧶
+# Historias Tejidas 
 
 Proyecto E-commerce Full-Stack para la venta de amigurumis personalizados.
 
