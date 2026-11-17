@@ -4,6 +4,8 @@ import '../style.css';
 import '../css/paginas/personaliza.css';
 import Calendario from "../components/Calendario";
 import Toast from '../components/Toast';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Personaliza() {
   const { idProducto } = useParams();   
@@ -103,16 +105,8 @@ function Personaliza() {
     <div>
       <Toast mensaje={toastMensaje} tipo={toastTipo} visible={toastVisible} />
 
-      <header>
-        <img src="/logo-sin-texto.png" alt="Logo" />
-        <nav className='navegador_principal'>
-          <NavLink to="/" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Inicio</NavLink>
-          <NavLink to="/catalogo" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Catálogo</NavLink>
-          <NavLink to="/personaliza" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Personaliza</NavLink>
-          <NavLink to="/carrito" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>Carrito</NavLink>
-          <NavLink to="/favoritos" className={({ isActive }) => isActive ? "nav__a--activo" : ""}>♥</NavLink>
-        </nav>
-      </header>
+      <Header />
+    
 
       <main className="pagina-personaliza">
         <h1>{idProducto ? "Personaliza tu producto" : "Crea Tu Historia"}</h1>
@@ -230,6 +224,8 @@ function Personaliza() {
           </form>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }
